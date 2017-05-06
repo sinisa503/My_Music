@@ -14,6 +14,7 @@ class AlbumCell: UICollectionViewCell {
     @IBOutlet weak var albumImage: UIImageView!
     @IBOutlet weak var artistLabel: UILabel!
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var checkImage: UIImageView!
     var album:Album?
     
     func updateAppearanceFor(_ album: Album?, animated: Bool = true) {
@@ -28,12 +29,22 @@ class AlbumCell: UICollectionViewCell {
         }
     }
     
+    func cellSelection(select: Bool) {
+        checkImage.isHidden = !select
+    }
+    
     override func prepareForReuse() {
         display(nil)
     }
     
     private func display(_ album:Album?) {
         if let album = album {
+            if album.isSelected {
+                checkImage.isHidden = false
+            }else {
+                checkImage.isHidden = true
+            }
+            
             albumImage.isHidden = false
             artistLabel.isHidden = false
             loadingIndicator.isHidden = true
@@ -46,6 +57,7 @@ class AlbumCell: UICollectionViewCell {
             albumImage.isHidden = true
             artistLabel.isHidden = true
             albumImage.image = nil
+            checkImage.isHidden = true
             artistLabel.text = ""
         }
     }

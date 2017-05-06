@@ -13,11 +13,13 @@ class Album {
     private let _name: String
     private let  _artist: String
     private let _imageUrl: String
+    private var _isSelected:Bool
 
     init(albumName: String, artistName:String, imageUrl: String) {
         _name = albumName
         _artist = artistName
         _imageUrl = imageUrl
+        _isSelected = false
     }
 
     
@@ -33,4 +35,12 @@ class Album {
         return _imageUrl
     }
     
+    var isSelected:Bool {
+        get {
+        return _isSelected
+        }
+        set {
+            _isSelected = newValue
+        }
+    }
 }

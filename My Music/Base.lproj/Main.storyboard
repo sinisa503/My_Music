@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="NCd-lF-G0v">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vom-8k-eh0">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Add new Albums-->
+        <!--Add AlbumVC-->
         <scene sceneID="Noa-uz-wOu">
             <objects>
-                <viewController id="icu-7t-R2m" customClass="MainViewController" customModule="My_Music" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="icu-7t-R2m" customClass="AddAlbumVC" customModule="My_Music" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9AO-oC-QtY"/>
                         <viewControllerLayoutGuide type="bottom" id="cyD-tr-PZz"/>
@@ -22,17 +22,34 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" text="Beatles" placeholder="Search for Artist" translatesAutoresizingMaskIntoConstraints="NO" id="i2x-hM-WU2">
-                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="icu-7t-R2m" id="ehI-ng-Kwg"/>
-                                </connections>
-                            </searchBar>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pmq-Ii-2PT">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="0ba-VI-BGg"/>
+                                </constraints>
+                                <color key="barTintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Add albums" id="VQz-v8-4cf">
+                                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="3qC-Xe-N3c">
+                                            <connections>
+                                                <action selector="dismissController:" destination="icu-7t-R2m" id="0T8-1j-Iak"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="L9C-oR-MWr">
+                                            <connections>
+                                                <action selector="saveAlbums:" destination="icu-7t-R2m" id="fQo-wg-EvN"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="DLG-w9-vM5">
-                                <rect key="frame" x="0.0" y="116" width="375" height="551"/>
+                                <rect key="frame" x="0.0" y="104" width="375" height="563"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="2" minimumInteritemSpacing="2" id="t2W-7C-ave">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="t2W-7C-ave">
                                     <size key="itemSize" width="120" height="120"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -61,6 +78,9 @@
                                                     <color key="shadowColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <size key="shadowOffset" width="1" height="1"/>
                                                 </label>
+                                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="check" translatesAutoresizingMaskIntoConstraints="NO" id="Shz-Ot-sAo">
+                                                    <rect key="frame" x="69.5" y="0.0" width="60" height="201"/>
+                                                </imageView>
                                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="N9V-gu-os6">
                                                     <rect key="frame" x="82" y="82" width="37" height="37"/>
                                                 </activityIndicatorView>
@@ -69,19 +89,24 @@
                                         <constraints>
                                             <constraint firstItem="N9V-gu-os6" firstAttribute="centerY" secondItem="Zza-cN-m3F" secondAttribute="centerY" id="0dB-ca-dEO"/>
                                             <constraint firstItem="Z63-9g-kHo" firstAttribute="leading" secondItem="Zza-cN-m3F" secondAttribute="leading" id="1bc-eJ-apq"/>
+                                            <constraint firstItem="Shz-Ot-sAo" firstAttribute="centerY" secondItem="Zza-cN-m3F" secondAttribute="centerY" id="5wK-FD-O3W"/>
                                             <constraint firstAttribute="bottom" secondItem="br6-8Y-btT" secondAttribute="bottom" id="Bkb-HN-k1p"/>
                                             <constraint firstAttribute="trailing" secondItem="Z63-9g-kHo" secondAttribute="trailing" id="Ewc-mC-HlK"/>
                                             <constraint firstItem="br6-8Y-btT" firstAttribute="top" secondItem="Zza-cN-m3F" secondAttribute="top" id="Hco-gp-iFy"/>
                                             <constraint firstItem="Z63-9g-kHo" firstAttribute="centerX" secondItem="Zza-cN-m3F" secondAttribute="centerX" id="O3w-No-9Ij"/>
+                                            <constraint firstItem="Shz-Ot-sAo" firstAttribute="width" secondItem="Zza-cN-m3F" secondAttribute="width" multiplier="0.3" id="VEb-gK-Zqd"/>
+                                            <constraint firstItem="Shz-Ot-sAo" firstAttribute="centerX" secondItem="Zza-cN-m3F" secondAttribute="centerX" id="WCA-xY-a9m"/>
                                             <constraint firstItem="br6-8Y-btT" firstAttribute="leading" secondItem="Zza-cN-m3F" secondAttribute="leading" id="coz-nh-6Cn"/>
                                             <constraint firstAttribute="trailing" secondItem="br6-8Y-btT" secondAttribute="trailing" id="cqo-Vi-VR4"/>
                                             <constraint firstItem="N9V-gu-os6" firstAttribute="centerX" secondItem="Zza-cN-m3F" secondAttribute="centerX" id="qiU-Z3-lrJ"/>
                                             <constraint firstItem="Z63-9g-kHo" firstAttribute="centerY" secondItem="Zza-cN-m3F" secondAttribute="centerY" multiplier="1.5" id="ulo-Iz-Zcf"/>
+                                            <constraint firstItem="Shz-Ot-sAo" firstAttribute="height" secondItem="Zza-cN-m3F" secondAttribute="height" constant="1" id="vaJ-Oj-OAC"/>
                                         </constraints>
                                         <size key="customSize" width="200" height="200"/>
                                         <connections>
                                             <outlet property="albumImage" destination="br6-8Y-btT" id="k7M-JC-KvK"/>
                                             <outlet property="artistLabel" destination="Z63-9g-kHo" id="MUc-gF-UdV"/>
+                                            <outlet property="checkImage" destination="Shz-Ot-sAo" id="agU-NW-cB5"/>
                                             <outlet property="loadingIndicator" destination="N9V-gu-os6" id="M6g-HC-Ard"/>
                                         </connections>
                                     </collectionViewCell>
@@ -91,28 +116,37 @@
                                     <outlet property="delegate" destination="icu-7t-R2m" id="wuR-HA-iJS"/>
                                 </connections>
                             </collectionView>
+                            <searchBar contentMode="redraw" text="Beatles" placeholder="Search for Artist" translatesAutoresizingMaskIntoConstraints="NO" id="i2x-hM-WU2">
+                                <rect key="frame" x="0.0" y="60" width="375" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="icu-7t-R2m" id="ehI-ng-Kwg"/>
+                                </connections>
+                            </searchBar>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="DLG-w9-vM5" firstAttribute="leading" secondItem="e8C-DD-7Bv" secondAttribute="leading" id="AUA-M6-BZK"/>
+                            <constraint firstItem="i2x-hM-WU2" firstAttribute="top" secondItem="Pmq-Ii-2PT" secondAttribute="bottom" id="DMa-FM-aGT"/>
                             <constraint firstAttribute="trailing" secondItem="DLG-w9-vM5" secondAttribute="trailing" id="EWn-TY-WBD"/>
-                            <constraint firstItem="DLG-w9-vM5" firstAttribute="top" secondItem="i2x-hM-WU2" secondAttribute="bottom" constant="8" id="Wwz-0J-GOF"/>
+                            <constraint firstAttribute="trailing" secondItem="Pmq-Ii-2PT" secondAttribute="trailing" id="Mgc-WQ-353"/>
+                            <constraint firstItem="Pmq-Ii-2PT" firstAttribute="leading" secondItem="e8C-DD-7Bv" secondAttribute="leading" id="TXd-qt-Imh"/>
+                            <constraint firstItem="DLG-w9-vM5" firstAttribute="top" secondItem="i2x-hM-WU2" secondAttribute="bottom" id="Wwz-0J-GOF"/>
                             <constraint firstItem="cyD-tr-PZz" firstAttribute="top" secondItem="DLG-w9-vM5" secondAttribute="bottom" id="YHJ-fH-dEH"/>
-                            <constraint firstItem="i2x-hM-WU2" firstAttribute="top" secondItem="9AO-oC-QtY" secondAttribute="bottom" id="iVp-A7-LVZ"/>
+                            <constraint firstItem="Pmq-Ii-2PT" firstAttribute="top" secondItem="e8C-DD-7Bv" secondAttribute="top" id="lhB-gc-NpR"/>
                             <constraint firstItem="i2x-hM-WU2" firstAttribute="leading" secondItem="e8C-DD-7Bv" secondAttribute="leading" id="mcd-ic-2zE"/>
                             <constraint firstAttribute="trailing" secondItem="i2x-hM-WU2" secondAttribute="trailing" id="p7J-VJ-EWy"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Add new Albums" id="cB3-y0-9fY"/>
                     <connections>
                         <outlet property="collection" destination="DLG-w9-vM5" id="l6f-q4-QKQ"/>
+                        <outlet property="saveButton" destination="L9C-oR-MWr" id="cEx-tk-dik"/>
                         <outlet property="searchBar" destination="i2x-hM-WU2" id="BLl-N7-dqO"/>
-                        <segue destination="6eS-dj-mZ5" kind="show" identifier="showAlbumDetail" id="fud-g4-W02"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7c4-YT-7b5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2104.8000000000002" y="196.55172413793105"/>
+            <point key="canvasLocation" x="4661.6000000000004" y="120.98950524737631"/>
         </scene>
         <!--Album Detail-->
         <scene sceneID="gCa-6h-Jqh">
@@ -126,12 +160,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Album Detail" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ke-H4-lbI">
-                                <rect key="frame" x="138" y="94" width="100" height="20"/>
-                                <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uUW-4s-BVM">
                                 <rect key="frame" x="62.5" y="208.5" width="250" height="250"/>
                                 <constraints>
@@ -139,9 +167,15 @@
                                     <constraint firstAttribute="height" constant="250" id="l22-hz-wbQ"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="igw-qa-fvx">
-                                <rect key="frame" x="167" y="587" width="42.5" height="20"/>
-                                <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="igw-qa-fvx">
+                                <rect key="frame" x="165" y="587" width="45" height="20"/>
+                                <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Album Detail" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ke-H4-lbI">
+                                <rect key="frame" x="129" y="156" width="117.5" height="23"/>
+                                <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -149,9 +183,9 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="5ke-H4-lbI" firstAttribute="centerX" secondItem="U6l-Wm-kjG" secondAttribute="centerX" id="8md-Ba-pdi"/>
+                            <constraint firstItem="uUW-4s-BVM" firstAttribute="top" secondItem="5ke-H4-lbI" secondAttribute="bottom" constant="30" id="CN2-0W-hbj"/>
                             <constraint firstItem="uUW-4s-BVM" firstAttribute="centerX" secondItem="U6l-Wm-kjG" secondAttribute="centerX" id="Htc-3c-kOw"/>
                             <constraint firstItem="5KJ-rG-ApH" firstAttribute="top" secondItem="igw-qa-fvx" secondAttribute="bottom" constant="60" id="SwG-Sl-Oac"/>
-                            <constraint firstItem="5ke-H4-lbI" firstAttribute="top" secondItem="1us-wK-Jeg" secondAttribute="bottom" constant="30" id="agT-S6-ieS"/>
                             <constraint firstItem="uUW-4s-BVM" firstAttribute="centerY" secondItem="U6l-Wm-kjG" secondAttribute="centerY" id="hRz-Ph-DkA"/>
                             <constraint firstItem="igw-qa-fvx" firstAttribute="centerX" secondItem="U6l-Wm-kjG" secondAttribute="centerX" id="rLW-bV-GT7"/>
                         </constraints>
@@ -165,25 +199,114 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fe0-X9-een" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2952.8000000000002" y="196.55172413793105"/>
+            <point key="canvasLocation" x="4663" y="866"/>
+        </scene>
+        <!--My albums-->
+        <scene sceneID="V5j-i7-8bb">
+            <objects>
+                <viewController id="Xnv-5X-WQe" customClass="MainVC" customModule="My_Music" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4wG-Kh-mCQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="iwC-KK-gCz"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Goy-Eg-LDl">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ZTu-B8-bZf">
+                                <rect key="frame" x="0.0" y="32" width="375" height="603"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="1a0-zc-gZ1">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell2" id="mIQ-6J-qeh">
+                                        <rect key="frame" x="87.5" y="0.0" width="200" height="200"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nhK-Xl-pij" userLabel="AlbumImage">
+                                                    <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pKD-MM-95U" customClass="GradientView" customModule="My_Music" customModuleProvider="target">
+                                                    <rect key="frame" x="-0.5" y="0.0" width="200" height="200"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="OM5-hM-nUS" userLabel="ArtistName">
+                                                    <rect key="frame" x="0.0" y="139.5" width="200" height="21.5"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="18"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <color key="shadowColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <size key="shadowOffset" width="1" height="1"/>
+                                                </label>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="bLC-pX-mQP">
+                                                    <rect key="frame" x="82" y="82" width="37" height="37"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </activityIndicatorView>
+                                            </subviews>
+                                        </view>
+                                        <size key="customSize" width="200" height="200"/>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="Xnv-5X-WQe" id="IFB-iw-i8s"/>
+                                    <outlet property="delegate" destination="Xnv-5X-WQe" id="dUm-1j-gJu"/>
+                                </connections>
+                            </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="You don't have any albums stored..." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="T2S-yX-7tv">
+                                <rect key="frame" x="30" y="322" width="314" height="23"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="My albums" id="iMo-OU-Gfh">
+                        <barButtonItem key="rightBarButtonItem" title="Add album" id="3ru-rj-uQd">
+                            <connections>
+                                <segue destination="icu-7t-R2m" kind="presentation" id="fQB-4L-a6y"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="collection" destination="ZTu-B8-bZf" id="G51-rJ-9oO"/>
+                        <outlet property="noAlbumsLabel" destination="T2S-yX-7tv" id="AfM-pW-XCx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BN4-2h-F63" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3761" y="517"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="fGY-S2-coW">
+        <scene sceneID="75W-6d-MqW">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="NCd-lF-G0v" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="vom-8k-eh0" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="HSQ-wb-OKW">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="GJv-9V-wjS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="icu-7t-R2m" kind="relationship" relationship="rootViewController" id="Tjc-7R-BGt"/>
+                        <segue destination="Xnv-5X-WQe" kind="relationship" relationship="rootViewController" id="SSl-fA-Pm1"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hA3-UC-RaD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="48D-aV-FVs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1165.5999999999999" y="196.55172413793105"/>
+            <point key="canvasLocation" x="2895" y="517"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="check" width="26" height="20"/>
+    </resources>
 </document>
