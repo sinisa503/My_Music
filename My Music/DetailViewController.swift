@@ -14,7 +14,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var artistLabel: UILabel!
     @IBOutlet weak var albumImage: UIImageView!
     
-    var album:Album?
+    var album:AlbumModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()

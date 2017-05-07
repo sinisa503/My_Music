@@ -12,11 +12,12 @@ import Alamofire
 
 class ApiService {
     
-    var arrayOfAlbums:[Album] = []
+    var arrayOfAlbums:[AlbumModel] = []
+    var arrayOfTracks:[TrackModel] = []
     
     func downloadTopAlbumsFor(artist: String, completed:  @escaping DownloadComplete) {
         
-        let formatedArtistString = artist.replacingOccurrences(of: " ", with: "&").lowercased()
+        let formatedArtistString = artist.replacingOccurrences(of: " ", with: "%20").lowercased()
         
         let currentUrl = URL(string: "\(BASE_URL)\(METHOD_GET_ARTIST_TOP_ALBUMS)\(formatedArtistString)\(API_KEY)\(FORMAT_JSON)")
         
@@ -34,8 +35,14 @@ class ApiService {
                                 albumName = name
                             }
                             if let images = album["image"] as? [Dictionary<String,String>] {
-                                if let imageUrl = images.first?["#text"] {
-                                    albumImage = imageUrl
+                                
+                                for image in images {
+                                    if let size = image["size"] {
+                                        if size == "large" {
+                                            let imageUrl = image["#text"]
+                                            albumImage = imageUrl
+                                        }
+                                    }
                                 }
                             }
                             if let artist = album["artist"] as? Dictionary<String,String> {
@@ -45,13 +52,52 @@ class ApiService {
                             }
                             guard albumName != nil, albumImage != nil, artistName != nil else { return }
                             
-                            let album = Album(albumName: albumName!, artistName: artistName!, imageUrl: albumImage!)
+                            let album = AlbumModel(albumName: albumName!, artistName: artistName!, imageUrl: albumImage!)
                             self?.arrayOfAlbums.append(album)
-                            print("Album name:\(album.name)             Artist name: \(album.artist)")
+                            //print("Album name:\(album.name)             Artist name: \(album.artist)")
                         }
                     }
                 }
             }
+            completed()
+        }
+    }
+    
+    
+    
+    func downloadInfo(albumName album:String,  forArtist artist: String, completed:  @escaping DownloadComplete) {
+        
+        let formatedArtistString = artist.replacingOccurrences(of: " ", with: "%20").lowercased()
+        let formatedAlbumString = album.replacingOccurrences(of: " ", with: "%20").lowercased()
+        
+        let currentUrl = URL(string: "\(BASE_URL)\(METHOD_GET_ALBUM_INFO)\(API_KEY)\(PARAMETAR_ARTIST)\(formatedArtistString)\(PARAMETAR_ALBUM)\(formatedAlbumString)\(FORMAT_JSON)")
+        
+        Alamofire.request(currentUrl!, method: .get).responseJSON { [weak self](response) in
+            
+                if let result = response.value as? Dictionary<String,AnyObject> {
+                    if let album = result["album"] as? Dictionary<String, AnyObject> {
+                        if let name = album["name"] as? String {
+                            print(name)
+                        }
+                        if let tracksObject = album["tracks"] as? Dictionary<String, AnyObject> {
+                            if let tracks = tracksObject["track"] as? [Dictionary<String, AnyObject>] {
+                                for track in tracks {
+                                    var trackName:String?
+                                    var trackDuration:String?
+                                    if let name = track["name"] as? String {
+                                        trackName = name
+                                    }
+                                    if let duration = track["duration"] as? String {
+                                        trackDuration = duration
+                                    }
+                                    guard trackName != nil, trackDuration != nil else { return }
+                                    let track = TrackModel(name: trackName!, duration: trackDuration!)
+                                    self?.arrayOfTracks.append(track)
+                                }
+                            }
+                        }
+                    }
+                }
             completed()
         }
     }

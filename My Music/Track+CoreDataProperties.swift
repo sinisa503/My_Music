@@ -1,0 +1,24 @@
+//
+//  Track+CoreDataProperties.swift
+//  My Music
+//
+//  Created by Sinisa Vukovic on 07/05/2017.
+//  Copyright © 2017 Sinisa Vukovic. All rights reserved.
+//
+
+import Foundation
+import CoreData
+
+
+extension Track {
+
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<Track> {
+        return NSFetchRequest<Track>(entityName: "Track")
+    }
+
+    @NSManaged public var duration: Int32
+    @NSManaged public var name: String?
+    @NSManaged public var id: String?
+    @NSManaged public var album: Album?
+
+}

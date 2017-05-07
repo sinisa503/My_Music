@@ -8,18 +8,18 @@
 
 import Foundation
 
-class Album {
+class AlbumModel {
     
+    private let _id: String? = nil
+    private var _tracks:[TrackModel]? = []
     private let _name: String
     private let  _artist: String
     private let _imageUrl: String
-    private var _isSelected:Bool
 
     init(albumName: String, artistName:String, imageUrl: String) {
         _name = albumName
         _artist = artistName
         _imageUrl = imageUrl
-        _isSelected = false
     }
 
     
@@ -33,14 +33,5 @@ class Album {
     
     var imageUrl: String {
         return _imageUrl
-    }
-    
-    var isSelected:Bool {
-        get {
-        return _isSelected
-        }
-        set {
-            _isSelected = newValue
-        }
     }
 }

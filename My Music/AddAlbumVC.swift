@@ -13,11 +13,11 @@ class AddAlbumVC: UIViewController {
     let loadingQueue = OperationQueue()
     var loadingOperations = [IndexPath : DataLoadOperation]()
     
-    @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collection: UICollectionView!
-    fileprivate var selectedAlbum:Album?
-    fileprivate var albumArray:[Album?] = [] {
+    fileprivate var selectedAlbum:AlbumModel?
+    fileprivate var selectedImage:UIImage?
+    fileprivate var albumArray:[AlbumModel?] = [] {
         didSet {
             collection.reloadData()
         }
@@ -27,23 +27,19 @@ class AddAlbumVC: UIViewController {
         super.viewDidLoad()
         
         collection.prefetchDataSource = self
-        dissableSaveButton()
+        
     }
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "showAlbumDetail" {
-//            if let detailVC = segue.destination as? DetailViewController {
-//                if let album = selectedAlbum {
-//                    detailVC.album = album
-//                }
-//            }
-//        }
-//    }
     @IBAction func dismissController(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }
-    @IBAction func saveAlbums(_ sender: UIBarButtonItem) {
-        print("Save")
+    
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let albumDetailVC = segue.destination as? AlbumDetailsVC {
+            albumDetailVC.album = selectedAlbum
+            albumDetailVC.albumImage = selectedImage
+        }
     }
     
     fileprivate func issueAlert(title: String, message: String) {
@@ -56,37 +52,17 @@ class AddAlbumVC: UIViewController {
         super.touchesBegan(touches, with: event)
         searchBar.resignFirstResponder()
     }
-    
-    fileprivate func dissableSaveButton() {
-        saveButton.tintColor = UIColor.clear
-        saveButton.isEnabled = false
-    }
-    fileprivate func enableSaveButton() {
-        saveButton.tintColor = nil
-        saveButton.isEnabled = true
-    }
 }
 
 extension AddAlbumVC: UICollectionViewDelegate {
     
     //MARK: UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        selectedAlbum = albumArray[indexPath.item]
-//        performSegue(withIdentifier: "showAlbumDetail" , sender: self)
-        enableSaveButton()
-        if let album = albumArray[indexPath.item] {
-            if album.isSelected {
-                album.isSelected = false
-                if let cell = collectionView.cellForItem(at: indexPath) as? AlbumCell {
-                    cell.cellSelection(select: false)
-                }
-            }else {
-                album.isSelected = true
-                if let cell = collectionView.cellForItem(at: indexPath) as? AlbumCell {
-                    cell.cellSelection(select: true)
-                }
-            }
+        selectedAlbum = albumArray[indexPath.item]
+        if let albumCell = collectionView.cellForItem(at: indexPath) as? AlbumCell {
+            selectedImage = albumCell.albumImage.image
         }
+        performSegue(withIdentifier: "goToAlbumDetails" , sender: self)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -94,7 +70,7 @@ extension AddAlbumVC: UICollectionViewDelegate {
         guard let cell = cell as? AlbumCell else { return }
         
         // How should the operation update the cell once the data has been loaded?
-        let updateCellClosure: (Album?) -> () = { [unowned self] (album) in
+        let updateCellClosure: (AlbumModel?) -> () = { [unowned self] (album) in
             cell.updateAppearanceFor(album, animated: true)
             self.loadingOperations.removeValue(forKey: indexPath)
         }
@@ -156,11 +132,18 @@ extension AddAlbumVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
     //MARK: UICollectionViewDelegateFlowLayout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let cellSpaceing:CGFloat = 0.0
+        let insets:CGFloat = 2.0
         let numberOfCellPerRow = 2
-        let width = (collection.frame.width / CGFloat(numberOfCellPerRow)) - (cellSpaceing * CGFloat(numberOfCellPerRow))
+        let numberOfCellPerColumn = 3
+        let width = (collection.frame.width / CGFloat(numberOfCellPerRow)) - (insets * CGFloat(numberOfCellPerRow))
+        let height = (collection.frame.height / CGFloat(numberOfCellPerColumn)) - (insets * CGFloat(numberOfCellPerColumn))
         
-        return CGSize(width: width, height: width)
+        return CGSize(width: width, height: height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        let insets = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
+        return insets
     }
     
     //MARK: UICollectionViewPrefetching

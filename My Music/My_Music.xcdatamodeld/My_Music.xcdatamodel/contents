@@ -1,4 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16E195" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Album" representedClassName=".Album" syncable="YES">
+        <attribute name="artist" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" attributeType="String" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="traks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Track" inverseName="album" inverseEntity="Track" syncable="YES"/>
+    </entity>
+    <entity name="Track" representedClassName=".Track" syncable="YES">
+        <attribute name="duration" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="album" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Album" inverseName="traks" inverseEntity="Album" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Album" positionX="-522" positionY="-186" width="128" height="118"/>
+        <element name="Track" positionX="-54" positionY="-9" width="128" height="103"/>
+    </elements>
 </model>

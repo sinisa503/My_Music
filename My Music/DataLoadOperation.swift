@@ -9,12 +9,12 @@
 import Foundation
 
 class DataLoadOperation: Operation {
-    var album: Album?
-    var loadingCompleteHandler: ((Album) -> ())?
+    var album: AlbumModel?
+    var loadingCompleteHandler: ((AlbumModel) -> ())?
     
-    private let _album: Album
+    private let _album: AlbumModel
     
-    init(_ album: Album) {
+    init(_ album: AlbumModel) {
         _album = album
     }
     

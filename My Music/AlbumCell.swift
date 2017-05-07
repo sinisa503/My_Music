@@ -11,13 +11,15 @@ import Alamofire
 
 class AlbumCell: UICollectionViewCell {
     
+    var cacheManager = ImageCache.shared
+    var request: Request?
+    
     @IBOutlet weak var albumImage: UIImageView!
     @IBOutlet weak var artistLabel: UILabel!
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var checkImage: UIImageView!
-    var album:Album?
     
-    func updateAppearanceFor(_ album: Album?, animated: Bool = true) {
+    func updateAppearanceFor(_ album: AlbumModel?, animated: Bool = true) {
+        reset()
         DispatchQueue.main.async {
             if animated {
                 UIView.animate(withDuration: 0.5) {
@@ -29,51 +31,52 @@ class AlbumCell: UICollectionViewCell {
         }
     }
     
-    func cellSelection(select: Bool) {
-        checkImage.isHidden = !select
+    func reset() {
+        albumImage.image = nil
+        request?.cancel()
+        artistLabel.isHidden = true
     }
     
     override func prepareForReuse() {
         display(nil)
     }
     
-    private func display(_ album:Album?) {
+    private func display(_ album:AlbumModel?) {
         if let album = album {
-            if album.isSelected {
-                checkImage.isHidden = false
-            }else {
-                checkImage.isHidden = true
-            }
-            
+            loadImage(album: album)
             albumImage.isHidden = false
             artistLabel.isHidden = false
             loadingIndicator.isHidden = true
             loadingIndicator.stopAnimating()
-            downloadImageFrom(url: album.imageUrl)
             artistLabel.text = album.name
-        }else {
+        }
+        else {
             loadingIndicator.isHidden = false
             loadingIndicator.startAnimating()
             albumImage.isHidden = true
             artistLabel.isHidden = true
             albumImage.image = nil
-            checkImage.isHidden = true
             artistLabel.text = ""
         }
     }
     
-    private func downloadImageFrom(url:String) {
-    let _url = NSURL(string: url)! as URL
-    let dataTask = URLSession.shared.dataTask(with: _url) { [weak self]
-        data, response, error in
-        if error == nil {
-            if let  data = data, let image = UIImage(data: data) {
-                self?.albumImage.image = image
-            }
-        } else {
-            self?.display(nil)
+    private func loadImage(album: AlbumModel) {
+        if let image = cacheManager.cachedImage(for: album.imageUrl) {
+            albumImage.image = image
+            return
         }
+        downloadImage(album: album)
     }
-    dataTask.resume()
+    
+    private func downloadImage(album: AlbumModel) {
+        request = cacheManager.retrieveImage(for: album.imageUrl, completion: {[weak self](image) in
+            self?.populate(with: image)
+        })
+    }
+    
+    func populate(with image: UIImage) {
+        loadingIndicator.isHidden = true
+        loadingIndicator.stopAnimating()
+        albumImage.image = image
     }
 }
