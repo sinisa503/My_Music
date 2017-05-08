@@ -267,21 +267,18 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="1a0-zc-gZ1">
                                     <size key="itemSize" width="50" height="50"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="headerReferenceSize" width="50" height="50"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell2" id="mIQ-6J-qeh" customClass="MainCell" customModule="My_Music" customModuleProvider="target">
-                                        <rect key="frame" x="87.5" y="0.0" width="200" height="200"/>
+                                        <rect key="frame" x="87.5" y="50" width="200" height="200"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pKD-MM-95U" customClass="GradientView" customModule="My_Music" customModuleProvider="target">
-                                                    <rect key="frame" x="-0.5" y="0.0" width="200" height="200"/>
-                                                </view>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="gZx-qK-dnK">
                                                     <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                                     <subviews>
@@ -301,13 +298,9 @@
                                             </subviews>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="pKD-MM-95U" firstAttribute="leading" secondItem="mIQ-6J-qeh" secondAttribute="leading" id="5qt-0C-PKI"/>
-                                            <constraint firstItem="pKD-MM-95U" firstAttribute="top" secondItem="mIQ-6J-qeh" secondAttribute="top" id="9kO-Mx-6rq"/>
-                                            <constraint firstAttribute="bottom" secondItem="pKD-MM-95U" secondAttribute="bottom" id="KgN-6H-9df"/>
                                             <constraint firstAttribute="bottom" secondItem="gZx-qK-dnK" secondAttribute="bottom" id="OSa-Kc-iYf"/>
                                             <constraint firstAttribute="trailing" secondItem="gZx-qK-dnK" secondAttribute="trailing" id="PNY-17-Snm"/>
                                             <constraint firstItem="gZx-qK-dnK" firstAttribute="top" secondItem="mIQ-6J-qeh" secondAttribute="top" id="oUd-u8-Qaj"/>
-                                            <constraint firstAttribute="trailing" secondItem="pKD-MM-95U" secondAttribute="trailing" id="s3n-wY-VUf"/>
                                             <constraint firstItem="gZx-qK-dnK" firstAttribute="leading" secondItem="mIQ-6J-qeh" secondAttribute="leading" id="yPo-FA-C1L"/>
                                         </constraints>
                                         <size key="customSize" width="200" height="200"/>
@@ -317,6 +310,32 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SectionHeader" id="chg-Hc-gZc" customClass="SectionHeaderView" customModule="My_Music" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pKD-MM-95U" customClass="GradientView" customModule="My_Music" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                        </view>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cIi-Fh-M2F">
+                                            <rect key="frame" x="160.5" y="14.5" width="54.5" height="22"/>
+                                            <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="19"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="pKD-MM-95U" firstAttribute="top" secondItem="chg-Hc-gZc" secondAttribute="top" id="11l-QC-16O"/>
+                                        <constraint firstAttribute="bottom" secondItem="pKD-MM-95U" secondAttribute="bottom" id="DmG-Dc-Eq4"/>
+                                        <constraint firstItem="cIi-Fh-M2F" firstAttribute="centerY" secondItem="chg-Hc-gZc" secondAttribute="centerY" id="U7T-kR-6z2"/>
+                                        <constraint firstAttribute="trailing" secondItem="pKD-MM-95U" secondAttribute="trailing" id="UII-0o-AKN"/>
+                                        <constraint firstItem="cIi-Fh-M2F" firstAttribute="centerX" secondItem="chg-Hc-gZc" secondAttribute="centerX" id="ogK-dY-ZbZ"/>
+                                        <constraint firstItem="pKD-MM-95U" firstAttribute="leading" secondItem="chg-Hc-gZc" secondAttribute="leading" id="ua6-Sp-EVF"/>
+                                    </constraints>
+                                    <connections>
+                                        <outlet property="sectionTitle" destination="cIi-Fh-M2F" id="Tea-tY-uGo"/>
+                                    </connections>
+                                </collectionReusableView>
                                 <connections>
                                     <outlet property="dataSource" destination="Xnv-5X-WQe" id="IFB-iw-i8s"/>
                                     <outlet property="delegate" destination="Xnv-5X-WQe" id="dUm-1j-gJu"/>

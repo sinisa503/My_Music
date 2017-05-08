@@ -21,6 +21,7 @@ class MainVC: UIViewController {
         
         collection.dataSource = self
         collection.delegate = self
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -41,11 +42,11 @@ class MainVC: UIViewController {
     
     private func instatiateFRC() {
         let request: NSFetchRequest<Album> = Album.fetchRequest()
-        let sortDesc = NSSortDescriptor(key: "name", ascending: true)
+        let sortDesc = NSSortDescriptor(key: "artist", ascending: true)
         request.sortDescriptors = [sortDesc]
         if let delegate = UIApplication.shared.delegate as? AppDelegate {
             let context = delegate.persistentContainer.viewContext
-            fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: "albumsCashe")
+            fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: "artist", cacheName: "albumsCashe")
             
             do {
                 try fetchedResultsController?.performFetch()
@@ -71,18 +72,34 @@ extension MainVC: UICollectionViewDelegate {
             performSegue(withIdentifier: "showAlbum", sender: nil)
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let sectionHeaderView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "SectionHeader", for: indexPath) as! SectionHeaderView
+        
+        if let album = fetchedResultsController?.object(at: indexPath) {
+            sectionHeaderView.title = album.artist
+        }
+        return sectionHeaderView
+    }
 }
 
 extension MainVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let numberOfAlbums = fetchedResultsController?.fetchedObjects?.count ?? 0
+        
+        let numberOfAlbums = fetchedResultsController?.sections?.count ?? 0
         if numberOfAlbums > 0 {
             noAlbumsLabel.isHidden = true
         }
-        return numberOfAlbums
+        
+        if let sections = fetchedResultsController?.sections {
+            let currentSection = sections[section]
+            return currentSection.numberOfObjects
+        }else {
+            return 0
+        }
     }
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        return fetchedResultsController?.sections?.count ?? 1
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell2", for: indexPath) as? MainCell {
