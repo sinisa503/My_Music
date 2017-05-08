@@ -65,7 +65,7 @@ class ApiService {
     
     
     
-    func downloadInfo(albumName album:String,  forArtist artist: String, completed:  @escaping DownloadComplete) {
+    func downloadInfo(albumName album:String,  forArtist artist: String, completed:  @escaping InfoDownloadComplete) {
         
         let formatedArtistString = artist.replacingOccurrences(of: " ", with: "%20").lowercased()
         let formatedAlbumString = album.replacingOccurrences(of: " ", with: "%20").lowercased()
@@ -73,11 +73,14 @@ class ApiService {
         let currentUrl = URL(string: "\(BASE_URL)\(METHOD_GET_ALBUM_INFO)\(API_KEY)\(PARAMETAR_ARTIST)\(formatedArtistString)\(PARAMETAR_ALBUM)\(formatedAlbumString)\(FORMAT_JSON)")
         
         Alamofire.request(currentUrl!, method: .get).responseJSON { [weak self](response) in
-            
+            var albumId:String?
                 if let result = response.value as? Dictionary<String,AnyObject> {
                     if let album = result["album"] as? Dictionary<String, AnyObject> {
                         if let name = album["name"] as? String {
                             print(name)
+                        }
+                        if let id = album["mbid"] as? String {
+                            albumId = id
                         }
                         if let tracksObject = album["tracks"] as? Dictionary<String, AnyObject> {
                             if let tracks = tracksObject["track"] as? [Dictionary<String, AnyObject>] {
@@ -98,7 +101,7 @@ class ApiService {
                         }
                     }
                 }
-            completed()
+            completed(albumId)
         }
     }
 }

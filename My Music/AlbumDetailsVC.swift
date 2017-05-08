@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class AlbumDetailsVC: UIViewController {
     
@@ -14,6 +15,7 @@ class AlbumDetailsVC: UIViewController {
     var albumImage: UIImage?
     var tracks: [TrackModel] = [] {
         didSet {
+            album?.set(tracks: tracks)
             for track in tracks {
                 if let duration = Double(track.trackDuration) {
                     let formatedDuration = Utils.timeString(time: duration)
@@ -24,6 +26,8 @@ class AlbumDetailsVC: UIViewController {
         }
     }
     
+    private var context: NSManagedObjectContext?
+    
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var albumImageView: UIImageView!
     @IBOutlet weak var tableView: UITableView!
@@ -33,6 +37,10 @@ class AlbumDetailsVC: UIViewController {
 
         tableView.delegate = self
         tableView.dataSource = self
+        
+//        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+//            context = appDelegate.persistentContainer.viewContext
+//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,9 +61,34 @@ class AlbumDetailsVC: UIViewController {
     
     private func downloadTracks(for album:AlbumModel) {
         let apiService = ApiService()
-        apiService.downloadInfo(albumName: album.name, forArtist: album.artist) { [weak self] in
+        apiService.downloadInfo(albumName: album.name, forArtist: album.artist) { [weak self] (albumId) in
             self?.tracks = apiService.arrayOfTracks
+            if let id = albumId {
+                album.set(id: id)
+                print(id)
+            }
         }
+    }
+    
+    @IBAction func saveAlbum(_ sender: UIBarButtonItem) {
+        
+        if albumDataCorrect {
+            if let context = context {
+                context.perform {[weak self] in
+                    if let image = self?.albumImage {
+                        let imageData:NSData? = UIImagePNGRepresentation(image) as NSData?                         
+                        if let data = imageData, let album = self?.album {
+                            Album.addNewAlbumToDatabase(albumModel: album, with: data, context: context)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    private var albumDataCorrect:Bool {
+        //TODO: Check if data is correct and if not issue alert
+        return true
     }
 }
 

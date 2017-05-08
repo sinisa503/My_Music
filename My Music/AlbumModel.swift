@@ -10,8 +10,8 @@ import Foundation
 
 class AlbumModel {
     
-    private let _id: String? = nil
-    private var _tracks:[TrackModel]? = []
+    private var _id: String? = nil
+    private var _tracks: [TrackModel]? = nil
     private let _name: String
     private let  _artist: String
     private let _imageUrl: String
@@ -22,6 +22,13 @@ class AlbumModel {
         _imageUrl = imageUrl
     }
 
+    var id:String? {
+        return _id
+    }
+    
+    var tracks: [TrackModel]? {
+        return _tracks
+    }
     
     var name: String {
         return _name
@@ -33,5 +40,13 @@ class AlbumModel {
     
     var imageUrl: String {
         return _imageUrl
+    }
+    
+    func set(tracks: [TrackModel]) {
+        self._tracks = tracks
+    }
+    
+    func set(id:String) {
+        self._id = id
     }
 }

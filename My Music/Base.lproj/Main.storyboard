@@ -226,7 +226,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Artist" id="LTP-Sp-w3W">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="0E3-sS-cXV"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="0E3-sS-cXV">
+                            <connections>
+                                <action selector="saveAlbum:" destination="78Q-WA-SOB" id="eUw-mW-ekT"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="albumImageView" destination="kwa-JH-ItV" id="BQ6-d2-qwf"/>
@@ -416,23 +420,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bjj-fG-acx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4661.6000000000004" y="120.98950524737631"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="NMA-Na-ouP">
-            <objects>
-                <viewController id="s62-nf-bgv" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="brA-nP-Ufn"/>
-                        <viewControllerLayoutGuide type="bottom" id="KS9-Mu-Te3"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="TBg-tI-nUD">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="XCn-aZ-ztn" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
         </scene>
     </scenes>
 </document>

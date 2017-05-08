@@ -2,7 +2,7 @@
 //  Track+CoreDataProperties.swift
 //  My Music
 //
-//  Created by Sinisa Vukovic on 07/05/2017.
+//  Created by Sinisa Vukovic on 08/05/2017.
 //  Copyright © 2017 Sinisa Vukovic. All rights reserved.
 //
 
@@ -16,9 +16,9 @@ extension Track {
         return NSFetchRequest<Track>(entityName: "Track")
     }
 
-    @NSManaged public var duration: Int32
-    @NSManaged public var name: String?
+    @NSManaged public var duration: String?
     @NSManaged public var id: String?
+    @NSManaged public var name: String?
     @NSManaged public var album: Album?
 
 }

@@ -8,13 +8,13 @@
         <relationship name="traks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Track" inverseName="album" inverseEntity="Track" syncable="YES"/>
     </entity>
     <entity name="Track" representedClassName=".Track" syncable="YES">
-        <attribute name="duration" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="duration" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="album" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Album" inverseName="traks" inverseEntity="Album" syncable="YES"/>
     </entity>
     <elements>
         <element name="Album" positionX="-522" positionY="-186" width="128" height="118"/>
-        <element name="Track" positionX="-54" positionY="-9" width="128" height="103"/>
+        <element name="Track" positionX="-54" positionY="-9" width="128" height="105"/>
     </elements>
 </model>
