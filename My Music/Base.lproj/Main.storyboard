@@ -23,7 +23,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" text="Bon Jovi" placeholder="Search for Artist" translatesAutoresizingMaskIntoConstraints="NO" id="i2x-hM-WU2">
+                            <searchBar contentMode="redraw" placeholder="Search for Artist" translatesAutoresizingMaskIntoConstraints="NO" id="i2x-hM-WU2">
                                 <rect key="frame" x="0.0" y="64" width="375" height="44"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
