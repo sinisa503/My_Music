@@ -11,6 +11,8 @@ import CoreData
 
 class AlbumDetailsVC: UIViewController {
     
+    @IBOutlet weak var saveButton: UIBarButtonItem!
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
     var album: AlbumModel?
     var albumImage: UIImage?
     var tracks: [TrackModel] = [] {
@@ -37,10 +39,11 @@ class AlbumDetailsVC: UIViewController {
 
         tableView.delegate = self
         tableView.dataSource = self
-        
-//        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
-//            context = appDelegate.persistentContainer.viewContext
-//        }
+        saveButton.isEnabled = false
+        activityIndicator.startAnimating()
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+            context = appDelegate.persistentContainer.viewContext
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,6 +65,9 @@ class AlbumDetailsVC: UIViewController {
     private func downloadTracks(for album:AlbumModel) {
         let apiService = ApiService()
         apiService.downloadInfo(albumName: album.name, forArtist: album.artist) { [weak self] (albumId) in
+            self?.saveButton.isEnabled = true
+            self?.activityIndicator.isHidden = true
+            self?.activityIndicator.stopAnimating()
             self?.tracks = apiService.arrayOfTracks
             if let id = albumId {
                 album.set(id: id)
@@ -78,12 +84,21 @@ class AlbumDetailsVC: UIViewController {
                     if let image = self?.albumImage {
                         let imageData:NSData? = UIImagePNGRepresentation(image) as NSData?                         
                         if let data = imageData, let album = self?.album {
-                            Album.addNewAlbumToDatabase(albumModel: album, with: data, context: context)
+                            Album.addNewAlbumToDatabase(albumModel: album, with: data, context: context) { [weak self] (saved) in
+                                if saved {
+                                    self?.saveButton.title = "Saved"
+                                    Timer.scheduledTimer(timeInterval: 1.5, target: self, selector: #selector(self?.goBackToSearch), userInfo: nil, repeats: false)
+                                }
+                            }
                         }
                     }
                 }
             }
         }
+    }
+    
+    @objc private func goBackToSearch() {
+        navigationController?.popViewController(animated: true)
     }
     
     private var albumDataCorrect:Bool {

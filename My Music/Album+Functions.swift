@@ -11,7 +11,7 @@ import CoreData
 
 extension Album {
     
-    static func addNewAlbumToDatabase(albumModel:AlbumModel,with image: NSData,context:NSManagedObjectContext) {
+    static func addNewAlbumToDatabase(albumModel:AlbumModel,with image: NSData,context:NSManagedObjectContext, saved: (Bool) -> ()) {
         
         let request = NSFetchRequest<Album>(entityName: CoreDataConstant.ALBUM_ENTITY_NAME)
         
@@ -37,7 +37,13 @@ extension Album {
                     }
                     newAlbum.image = image
                 }
-                try? context.save()
+                do {
+                    try context.save()
+                    saved(true)
+                } catch let error {
+                    saved(false)
+                    print("Error saveing Album \(error.localizedDescription)")
+                }
             }
         } catch let error {
             print(error.localizedDescription)

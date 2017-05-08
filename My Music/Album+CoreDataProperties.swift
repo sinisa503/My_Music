@@ -17,26 +17,26 @@ extension Album {
     }
 
     @NSManaged public var artist: String?
+    @NSManaged public var name: String?
     @NSManaged public var id: String?
     @NSManaged public var image: NSData?
-    @NSManaged public var name: String?
-    @NSManaged public var traks: NSSet?
+    @NSManaged public var tracks: NSSet?
 
 }
 
-// MARK: Generated accessors for traks
+// MARK: Generated accessors for tracks
 extension Album {
 
-    @objc(addTraksObject:)
-    @NSManaged public func addToTraks(_ value: Track)
+    @objc(addTracksObject:)
+    @NSManaged public func addToTracks(_ value: Track)
 
-    @objc(removeTraksObject:)
-    @NSManaged public func removeFromTraks(_ value: Track)
+    @objc(removeTracksObject:)
+    @NSManaged public func removeFromTracks(_ value: Track)
 
-    @objc(addTraks:)
-    @NSManaged public func addToTraks(_ values: NSSet)
+    @objc(addTracks:)
+    @NSManaged public func addToTracks(_ values: NSSet)
 
-    @objc(removeTraks:)
-    @NSManaged public func removeFromTraks(_ values: NSSet)
+    @objc(removeTracks:)
+    @NSManaged public func removeFromTracks(_ values: NSSet)
 
 }
