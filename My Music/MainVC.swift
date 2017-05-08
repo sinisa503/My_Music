@@ -12,12 +12,13 @@ import CoreData
 class MainVC: UIViewController {
     
     fileprivate var fetchedResultsController: NSFetchedResultsController<Album>?
-
+    fileprivate var selectedAlbum:Album?
+    
     @IBOutlet weak var collection: UICollectionView!
     @IBOutlet weak var noAlbumsLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         collection.dataSource = self
         collection.delegate = self
     }
@@ -26,6 +27,16 @@ class MainVC: UIViewController {
         super.viewWillAppear(animated)
         instatiateFRC()
         collection.reloadData()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let navigationController = segue.destination as? UINavigationController {
+            if let detailsVC = navigationController.viewControllers.first as? DetailViewController{
+                if let album = selectedAlbum {
+                    detailsVC.album = album
+                }
+            }
+        }
     }
     
     private func instatiateFRC() {
@@ -50,11 +61,16 @@ class MainVC: UIViewController {
             }
         }
     }
-
+    
 }
 
 extension MainVC: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let album = fetchedResultsController?.object(at: indexPath) {
+            selectedAlbum = album
+            performSegue(withIdentifier: "showAlbum", sender: nil)
+        }
+    }
 }
 
 extension MainVC: UICollectionViewDataSource {
@@ -69,9 +85,10 @@ extension MainVC: UICollectionViewDataSource {
         return 1
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let album = fetchedResultsController?.object(at: indexPath)
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell2", for: indexPath) as? AlbumCell {
-            cell.updateAppearanceFor(album)
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell2", for: indexPath) as? MainCell {
+            if let album = fetchedResultsController?.object(at: indexPath) {
+                cell.configureCell(album: album)
+            }
             return cell
         }else {
             return UICollectionViewCell()
@@ -84,7 +101,7 @@ extension MainVC: UICollectionViewDelegateFlowLayout {
     //MARK: UICollectionViewDelegateFlowLayout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let insets:CGFloat = 2.0
+        let insets:CGFloat = 10.0
         let numberOfCellPerRow = 2
         let numberOfCellPerColumn = 3
         let width = (collection.frame.width / CGFloat(numberOfCellPerRow)) - (insets * CGFloat(numberOfCellPerRow))
@@ -94,7 +111,7 @@ extension MainVC: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        let insets = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
+        let insets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         return insets
     }
 }

@@ -19,6 +19,7 @@
 		020908401EC0797E0006EDE1 /* Album+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0209083C1EC0797E0006EDE1 /* Album+CoreDataProperties.swift */; };
 		020908411EC0797E0006EDE1 /* Track+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0209083D1EC0797E0006EDE1 /* Track+CoreDataClass.swift */; };
 		020908421EC0797E0006EDE1 /* Track+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0209083E1EC0797E0006EDE1 /* Track+CoreDataProperties.swift */; };
+		020908441EC0944D0006EDE1 /* MainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020908431EC0944D0006EDE1 /* MainCell.swift */; };
 		023674821EBEB351006DCC50 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023674811EBEB351006DCC50 /* ImageCache.swift */; };
 		023674841EBFC634006DCC50 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023674831EBFC634006DCC50 /* Utils.swift */; };
 		023674861EBFCA62006DCC50 /* Album+Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023674851EBFCA62006DCC50 /* Album+Functions.swift */; };
@@ -76,6 +77,7 @@
 		0209083C1EC0797E0006EDE1 /* Album+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Album+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0209083D1EC0797E0006EDE1 /* Track+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Track+CoreDataClass.swift"; sourceTree = "<group>"; };
 		0209083E1EC0797E0006EDE1 /* Track+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Track+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		020908431EC0944D0006EDE1 /* MainCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCell.swift; sourceTree = "<group>"; };
 		023674811EBEB351006DCC50 /* ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		023674831EBFC634006DCC50 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		023674851EBFCA62006DCC50 /* Album+Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Album+Functions.swift"; sourceTree = "<group>"; };
@@ -206,9 +208,9 @@
 			children = (
 				0209083B1EC0797E0006EDE1 /* Album+CoreDataClass.swift */,
 				0209083C1EC0797E0006EDE1 /* Album+CoreDataProperties.swift */,
+				023674851EBFCA62006DCC50 /* Album+Functions.swift */,
 				0209083D1EC0797E0006EDE1 /* Track+CoreDataClass.swift */,
 				0209083E1EC0797E0006EDE1 /* Track+CoreDataProperties.swift */,
-				023674851EBFCA62006DCC50 /* Album+Functions.swift */,
 				023674891EBFF141006DCC50 /* Track+Functions.swift */,
 				020908301EC0779C0006EDE1 /* MusicDatabase.xcdatamodeld */,
 			);
@@ -257,6 +259,7 @@
 		02A78C111EBCE682001F110B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				020908431EC0944D0006EDE1 /* MainCell.swift */,
 				02A78C0F1EBCDA00001F110B /* AlbumCell.swift */,
 				02A78C161EBDD4B4001F110B /* GradientView.swift */,
 			);
@@ -586,6 +589,7 @@
 				023674821EBEB351006DCC50 /* ImageCache.swift in Sources */,
 				0209083F1EC0797E0006EDE1 /* Album+CoreDataClass.swift in Sources */,
 				02A78C131EBD60B3001F110B /* DetailViewController.swift in Sources */,
+				020908441EC0944D0006EDE1 /* MainCell.swift in Sources */,
 				02AB38701EBE4F4E00D4A3D3 /* AlbumDetailsVC.swift in Sources */,
 				02A78C171EBDD4B4001F110B /* GradientView.swift in Sources */,
 				02A78C191EBDD9C4001F110B /* DataLoadOperation.swift in Sources */,

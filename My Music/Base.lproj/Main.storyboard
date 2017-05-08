@@ -265,49 +265,55 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ZTu-B8-bZf">
                                 <rect key="frame" x="0.0" y="32" width="375" height="603"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="3" minimumInteritemSpacing="0.0" id="1a0-zc-gZ1">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="1a0-zc-gZ1">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    <inset key="sectionInset" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell2" id="mIQ-6J-qeh" customClass="AlbumCell" customModule="My_Music" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell2" id="mIQ-6J-qeh" customClass="MainCell" customModule="My_Music" customModuleProvider="target">
                                         <rect key="frame" x="87.5" y="0.0" width="200" height="200"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nhK-Xl-pij" userLabel="AlbumImage">
-                                                    <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                </imageView>
-                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pKD-MM-95U" customClass="GradientView" customModule="My_Music" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pKD-MM-95U" customClass="GradientView" customModule="My_Music" customModuleProvider="target">
                                                     <rect key="frame" x="-0.5" y="0.0" width="200" height="200"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="OM5-hM-nUS" userLabel="ArtistName">
-                                                    <rect key="frame" x="0.0" y="139.5" width="200" height="21.5"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="18"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <color key="shadowColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <size key="shadowOffset" width="1" height="1"/>
-                                                </label>
-                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="bLC-pX-mQP">
-                                                    <rect key="frame" x="82" y="82" width="37" height="37"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                </activityIndicatorView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="gZx-qK-dnK">
+                                                    <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nhK-Xl-pij" userLabel="AlbumImage">
+                                                            <rect key="frame" x="0.0" y="0.0" width="200" height="140"/>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="OM5-hM-nUS" userLabel="albumLabel">
+                                                            <rect key="frame" x="0.0" y="140" width="200" height="60"/>
+                                                            <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="18"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                            <color key="shadowColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <size key="shadowOffset" width="1" height="1"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
                                             </subviews>
                                         </view>
+                                        <constraints>
+                                            <constraint firstItem="pKD-MM-95U" firstAttribute="leading" secondItem="mIQ-6J-qeh" secondAttribute="leading" id="5qt-0C-PKI"/>
+                                            <constraint firstItem="pKD-MM-95U" firstAttribute="top" secondItem="mIQ-6J-qeh" secondAttribute="top" id="9kO-Mx-6rq"/>
+                                            <constraint firstAttribute="bottom" secondItem="pKD-MM-95U" secondAttribute="bottom" id="KgN-6H-9df"/>
+                                            <constraint firstAttribute="bottom" secondItem="gZx-qK-dnK" secondAttribute="bottom" id="OSa-Kc-iYf"/>
+                                            <constraint firstAttribute="trailing" secondItem="gZx-qK-dnK" secondAttribute="trailing" id="PNY-17-Snm"/>
+                                            <constraint firstItem="gZx-qK-dnK" firstAttribute="top" secondItem="mIQ-6J-qeh" secondAttribute="top" id="oUd-u8-Qaj"/>
+                                            <constraint firstAttribute="trailing" secondItem="pKD-MM-95U" secondAttribute="trailing" id="s3n-wY-VUf"/>
+                                            <constraint firstItem="gZx-qK-dnK" firstAttribute="leading" secondItem="mIQ-6J-qeh" secondAttribute="leading" id="yPo-FA-C1L"/>
+                                        </constraints>
                                         <size key="customSize" width="200" height="200"/>
                                         <connections>
-                                            <outlet property="albumImage" destination="nhK-Xl-pij" id="8bK-uQ-EbE"/>
-                                            <outlet property="artistLabel" destination="OM5-hM-nUS" id="A5P-Xa-uBh"/>
-                                            <outlet property="loadingIndicator" destination="bLC-pX-mQP" id="jrb-hX-dju"/>
-                                            <segue destination="GFb-aP-kkF" kind="presentation" id="Uz9-ns-1yq"/>
+                                            <outlet property="albumImage" destination="nhK-Xl-pij" id="G0R-GI-Ayi"/>
+                                            <outlet property="albumlabel" destination="OM5-hM-nUS" id="nEQ-9I-q7T"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -340,11 +346,12 @@
                     <connections>
                         <outlet property="collection" destination="ZTu-B8-bZf" id="G51-rJ-9oO"/>
                         <outlet property="noAlbumsLabel" destination="T2S-yX-7tv" id="AfM-pW-XCx"/>
+                        <segue destination="YOF-Th-nzY" kind="showDetail" identifier="showAlbum" id="BC4-hh-vOs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BN4-2h-F63" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3761" y="517"/>
+            <point key="canvasLocation" x="3760.8000000000002" y="516.79160419790105"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="75W-6d-MqW">
@@ -395,23 +402,23 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O3J-dj-G07">
-                                <rect key="frame" x="0.0" y="20" width="375" height="280"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="236"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t6U-gQ-EhE" customClass="GradientView" customModule="My_Music" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="280"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="236"/>
                                     </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iCM-Pr-GAo">
-                                        <rect key="frame" x="75" y="56" width="225" height="167.5"/>
+                                        <rect key="frame" x="75" y="47" width="225" height="141.5"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tracks" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nXd-9Z-D0k">
-                                        <rect key="frame" x="158" y="257" width="59.5" height="23"/>
+                                        <rect key="frame" x="158" y="213" width="59.5" height="23"/>
                                         <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                         <size key="shadowOffset" width="0.0" height="0.0"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Album name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hJ3-sz-dZO">
-                                        <rect key="frame" x="130" y="8" width="114" height="32"/>
+                                        <rect key="frame" x="130" y="8" width="114" height="23"/>
                                         <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -438,7 +445,7 @@
                                 <rect key="frame" x="0.0" y="300" width="375" height="367"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.62548159250000002" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TableCell" textLabel="Zl3-Dj-KI5" detailTextLabel="mMe-0L-xBX" style="IBUITableViewCellStyleValue1" id="ljc-rb-H9M">
+                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MainTableCell" textLabel="Zl3-Dj-KI5" detailTextLabel="mMe-0L-xBX" style="IBUITableViewCellStyleValue1" id="ljc-rb-H9M">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ljc-rb-H9M" id="Qp6-z5-s8b">
@@ -465,8 +472,8 @@
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="dataSource" destination="GFb-aP-kkF" id="wsd-Ic-gqf"/>
-                                    <outlet property="delegate" destination="GFb-aP-kkF" id="vxS-TW-11M"/>
+                                    <outlet property="dataSource" destination="GFb-aP-kkF" id="sZz-7H-Ano"/>
+                                    <outlet property="delegate" destination="GFb-aP-kkF" id="uZr-q8-7M3"/>
                                 </connections>
                             </tableView>
                         </subviews>
@@ -483,21 +490,44 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Artist" id="ZdO-VL-lW2">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="LjL-m9-3RJ">
+                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="vah-23-5hn">
                             <connections>
-                                <action selector="saveAlbum:" destination="GFb-aP-kkF" id="OUH-wK-vUQ"/>
+                                <action selector="goToSavedAlbums:" destination="GFb-aP-kkF" id="rw4-NB-c18"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Delete Album" id="LjL-m9-3RJ">
+                            <connections>
+                                <action selector="deleteAlbum:" destination="GFb-aP-kkF" id="Sm8-h3-fkZ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="albumImageView" destination="iCM-Pr-GAo" id="XwJ-An-EFj"/>
-                        <outlet property="nameLabel" destination="hJ3-sz-dZO" id="Oqq-Da-bTy"/>
-                        <outlet property="tableView" destination="WaF-cw-frK" id="hAu-pH-Mwu"/>
+                        <outlet property="albumImage" destination="iCM-Pr-GAo" id="zMn-ds-dPF"/>
+                        <outlet property="albumNameLabel" destination="hJ3-sz-dZO" id="sX3-HB-Hg7"/>
+                        <outlet property="tableView" destination="WaF-cw-frK" id="jWK-VU-FTt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hZT-0W-MzJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4825" y="942"/>
+            <point key="canvasLocation" x="5764" y="941.37931034482767"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="w9q-Of-zqD">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="YOF-Th-nzY" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="mva-I5-vTh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="GFb-aP-kkF" kind="relationship" relationship="rootViewController" id="BbV-l1-5Gb"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="alv-rK-fLH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4824.8000000000002" y="941.37931034482767"/>
         </scene>
     </scenes>
 </document>

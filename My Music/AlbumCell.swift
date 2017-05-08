@@ -30,15 +30,6 @@ class AlbumCell: UICollectionViewCell {
             }
         }
     }
-
-    func updateAppearanceFor(_ album: Album?){
-        loadingIndicator.isHidden = true
-        if let image = UIImage(data: album!.image! as Data) {
-            albumImage.image = image
-        }
-        
-        artistLabel.text = album?.artist
-    }
     
     func reset() {
         albumImage.image = nil

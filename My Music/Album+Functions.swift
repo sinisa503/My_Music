@@ -49,5 +49,22 @@ extension Album {
             print(error.localizedDescription)
         }
     }
+    
+    
+    
+    static func deleteAlbumFromDatabase(album:Album, deleted: @escaping (Bool) -> ()) {
+        if let context = album.managedObjectContext {
+            context.perform {
+                context.delete(album)
+                do {
+                    try context.save()
+                    deleted(true)
+                }catch let error {
+                    deleted(false)
+                    print("Error deleteing Album: \(error.localizedDescription)")
+                }
+            }
+        }
+    }
 }
 
