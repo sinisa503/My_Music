@@ -72,10 +72,9 @@ class ApiService {
         let formatedArtistString = artist.replacingOccurrences(of: " ", with: "%20").lowercased()
         let formatedAlbumString = album.replacingOccurrences(of: " ", with: "%20").lowercased()
         
-        let currentUrl = URL(string: "\(BASE_URL)\(METHOD_GET_ALBUM_INFO)\(API_KEY)\(PARAMETAR_ARTIST)\(formatedArtistString)\(PARAMETAR_ALBUM)\(formatedAlbumString)\(FORMAT_JSON)")
-        
-        Alamofire.request(currentUrl!, method: .get).responseJSON { [weak self](response) in
-            var albumId:String?
+        if let currentUrl = URL(string: "\(BASE_URL)\(METHOD_GET_ALBUM_INFO)\(API_KEY)\(PARAMETAR_ARTIST)\(formatedArtistString)\(PARAMETAR_ALBUM)\(formatedAlbumString)\(FORMAT_JSON)") {
+            Alamofire.request(currentUrl, method: .get).responseJSON { [weak self](response) in
+                var albumId:String?
                 if let result = response.value as? Dictionary<String,AnyObject> {
                     if let album = result["album"] as? Dictionary<String, AnyObject> {
                         if let name = album["name"] as? String {
@@ -103,7 +102,8 @@ class ApiService {
                         }
                     }
                 }
-            completed(albumId)
+                completed(albumId)
+            }
         }
-    }
+        }
 }
