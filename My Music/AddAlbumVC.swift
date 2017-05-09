@@ -177,9 +177,11 @@ extension AddAlbumVC: UISearchBarDelegate {
         let apiService = ApiService()
         
         if let artist = searchBar.text {
-            apiService.downloadTopAlbumsFor(artist: artist) {[weak self] in
-                if apiService.arrayOfAlbums.count > 0 {
+            apiService.downloadTopAlbumsFor(artist: artist) {[weak self] (completed) in
+                if completed && apiService.arrayOfAlbums.count > 0 {
                     self?.albumArray = apiService.arrayOfAlbums
+                }else {
+                    self?.issueAlert(title: "Not found", message: "Try different search")
                 }
             }
         }

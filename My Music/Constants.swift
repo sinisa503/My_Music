@@ -30,7 +30,7 @@ let TEST_REQUEST_ALBUMS_CHER = "http://ws.audioscrobbler.com/2.0/?method=artist.
 
 let TEST_REQUEST_ALBUM_CHER = "http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key= f639f537be3377151be68a932521eca0&artist=Cher&album=Believe&format=json"
 
-typealias DownloadComplete = () -> ()
+typealias DownloadComplete = (Bool) -> ()
 typealias InfoDownloadComplete = (String?) -> ()
 
 struct CoreDataConstant {
