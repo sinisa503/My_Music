@@ -66,5 +66,23 @@ extension Album {
             }
         }
     }
+    
+    static func alreadyInDatabase(album:AlbumModel, context: NSManagedObjectContext) -> Bool {
+        var albumExsists:Bool = false
+        context.performAndWait {
+            let request = NSFetchRequest<Album>(entityName: CoreDataConstant.ALBUM_ENTITY_NAME)
+            if let id = album.id {
+                request.predicate = NSPredicate(format: "id = %@", id)
+            }else {
+                request.predicate = NSPredicate(format: "name = %@", album.name)
+            }
+            if let albums =  try? context.fetch(request) {
+                if albums.count > 0 {
+                    albumExsists = true
+                }
+            }
+        }
+        return albumExsists
+    }
 }
 

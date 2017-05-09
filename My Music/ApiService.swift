@@ -105,5 +105,5 @@ class ApiService {
                 completed(albumId)
             }
         }
-        }
+    }
 }

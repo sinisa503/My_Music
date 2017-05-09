@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import CoreData
 
 class AlbumCell: UICollectionViewCell {
     
@@ -17,6 +18,7 @@ class AlbumCell: UICollectionViewCell {
     @IBOutlet weak var albumImage: UIImageView!
     @IBOutlet weak var artistLabel: UILabel!
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var dimmedView: UIView!
     
     func updateAppearanceFor(_ album: AlbumModel?, animated: Bool = true) {
         reset()
@@ -43,6 +45,7 @@ class AlbumCell: UICollectionViewCell {
     
     private func display(_ album:AlbumModel?) {
         if let album = album {
+            dimmCell(album: album)
             loadImage(album: album)
             albumImage.isHidden = false
             artistLabel.isHidden = false
@@ -51,6 +54,7 @@ class AlbumCell: UICollectionViewCell {
             artistLabel.text = album.name
         }
         else {
+            dimmedView.isHidden = true
             loadingIndicator.isHidden = false
             loadingIndicator.startAnimating()
             albumImage.isHidden = true
@@ -74,9 +78,18 @@ class AlbumCell: UICollectionViewCell {
         })
     }
     
-    func populate(with image: UIImage) {
+    private func populate(with image: UIImage) {
         loadingIndicator.isHidden = true
         loadingIndicator.stopAnimating()
         albumImage.image = image
+    }
+    private func dimmCell(album: AlbumModel) {
+        if let delegate = UIApplication.shared.delegate as? AppDelegate{
+             let context = delegate.persistentContainer.viewContext
+            if Album.alreadyInDatabase(album: album, context: context) {
+                dimmedView.isHidden = false
+                self.isUserInteractionEnabled = false
+            }
+        }
     }
 }

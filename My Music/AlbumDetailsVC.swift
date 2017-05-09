@@ -76,8 +76,7 @@ class AlbumDetailsVC: UIViewController {
         }
     }
     
-    @IBAction func saveAlbum(_ sender: UIBarButtonItem) {
-        
+    @IBAction func saveAlbum(_ sender: UIBarButtonItem) {  
         if albumDataCorrect {
             if let context = context {
                 context.perform {[weak self] in
@@ -87,7 +86,7 @@ class AlbumDetailsVC: UIViewController {
                             Album.addNewAlbumToDatabase(albumModel: album, with: data, context: context) { [weak self] (saved) in
                                 if saved {
                                     self?.saveButton.title = "Saved"
-                                    Timer.scheduledTimer(timeInterval: 1.5, target: self, selector: #selector(self?.goBackToSearch), userInfo: nil, repeats: false)
+                                    Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self?.goBackToSearch), userInfo: nil, repeats: false)
                                 }
                             }
                         }

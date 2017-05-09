@@ -69,6 +69,22 @@
                                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="N9V-gu-os6">
                                                     <rect key="frame" x="82" y="82" width="37" height="37"/>
                                                 </activityIndicatorView>
+                                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mR7-g3-yYe">
+                                                    <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Saved" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dAW-Ad-ZoC">
+                                                            <rect key="frame" x="61" y="86" width="79" height="28.5"/>
+                                                            <fontDescription key="fontDescription" name="Georgia-BoldItalic" family="Georgia" pointSize="25"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.74547838184931503" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstItem="dAW-Ad-ZoC" firstAttribute="centerY" secondItem="mR7-g3-yYe" secondAttribute="centerY" id="XMp-jN-2sv"/>
+                                                        <constraint firstItem="dAW-Ad-ZoC" firstAttribute="centerX" secondItem="mR7-g3-yYe" secondAttribute="centerX" id="l8V-Hv-F98"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                         </view>
                                         <constraints>
@@ -77,16 +93,21 @@
                                             <constraint firstAttribute="bottom" secondItem="br6-8Y-btT" secondAttribute="bottom" id="Bkb-HN-k1p"/>
                                             <constraint firstAttribute="trailing" secondItem="Z63-9g-kHo" secondAttribute="trailing" id="Ewc-mC-HlK"/>
                                             <constraint firstItem="br6-8Y-btT" firstAttribute="top" secondItem="Zza-cN-m3F" secondAttribute="top" id="Hco-gp-iFy"/>
+                                            <constraint firstItem="mR7-g3-yYe" firstAttribute="top" secondItem="Zza-cN-m3F" secondAttribute="top" id="NE9-Dc-9wq"/>
                                             <constraint firstItem="Z63-9g-kHo" firstAttribute="centerX" secondItem="Zza-cN-m3F" secondAttribute="centerX" id="O3w-No-9Ij"/>
                                             <constraint firstAttribute="bottom" secondItem="Z63-9g-kHo" secondAttribute="bottom" id="b8M-ka-dN3"/>
                                             <constraint firstItem="br6-8Y-btT" firstAttribute="leading" secondItem="Zza-cN-m3F" secondAttribute="leading" id="coz-nh-6Cn"/>
                                             <constraint firstAttribute="trailing" secondItem="br6-8Y-btT" secondAttribute="trailing" id="cqo-Vi-VR4"/>
+                                            <constraint firstAttribute="bottom" secondItem="mR7-g3-yYe" secondAttribute="bottom" id="f4T-4K-hwz"/>
+                                            <constraint firstItem="mR7-g3-yYe" firstAttribute="leading" secondItem="Zza-cN-m3F" secondAttribute="leading" id="jy6-i6-fF1"/>
+                                            <constraint firstAttribute="trailing" secondItem="mR7-g3-yYe" secondAttribute="trailing" id="ptf-a4-jV5"/>
                                             <constraint firstItem="N9V-gu-os6" firstAttribute="centerX" secondItem="Zza-cN-m3F" secondAttribute="centerX" id="qiU-Z3-lrJ"/>
                                         </constraints>
                                         <size key="customSize" width="200" height="200"/>
                                         <connections>
                                             <outlet property="albumImage" destination="br6-8Y-btT" id="k7M-JC-KvK"/>
                                             <outlet property="artistLabel" destination="Z63-9g-kHo" id="MUc-gF-UdV"/>
+                                            <outlet property="dimmedView" destination="mR7-g3-yYe" id="6Z8-Hg-WjQ"/>
                                             <outlet property="loadingIndicator" destination="N9V-gu-os6" id="M6g-HC-Ard"/>
                                         </connections>
                                     </collectionViewCell>

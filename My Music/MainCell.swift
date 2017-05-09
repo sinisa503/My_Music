@@ -19,7 +19,7 @@ class MainCell: UICollectionViewCell {
             albumImage.image = image
         }
         
-        albumlabel.text = album.artist
+        albumlabel.text = album.name
     }
     
 }
