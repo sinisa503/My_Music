@@ -67,14 +67,14 @@ extension Album {
         }
     }
     
-    static func alreadyInDatabase(album:AlbumModel, context: NSManagedObjectContext) -> Bool {
+    static func alreadyInDatabase(album:ObjAlbum, context: NSManagedObjectContext) -> Bool {
         var albumExsists:Bool = false
         context.performAndWait {
             let request = NSFetchRequest<Album>(entityName: CoreDataConstant.ALBUM_ENTITY_NAME)
-            if let id = album.id {
+            if let id = album.mbid {
                 request.predicate = NSPredicate(format: "id = %@", id)
             }else {
-                request.predicate = NSPredicate(format: "name = %@", album.name)
+                request.predicate = NSPredicate(format: "name = %@", album.name!)
             }
             if let albums =  try? context.fetch(request) {
                 if albums.count > 0 {

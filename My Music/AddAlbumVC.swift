@@ -15,9 +15,9 @@ class AddAlbumVC: UIViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collection: UICollectionView!
-    fileprivate var selectedAlbum:AlbumModel?
+    fileprivate var selectedAlbum:ObjAlbum?
     fileprivate var selectedImage:UIImage?
-    fileprivate var albumArray:[AlbumModel?] = [] {
+    fileprivate var albumArray:[ObjAlbum?] = [] {
         didSet {
             collection.reloadData()
         }
@@ -25,9 +25,12 @@ class AddAlbumVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         collection.prefetchDataSource = self
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        collection.reloadData()
     }
     
     @IBAction func dismissController(_ sender: UIBarButtonItem) {
@@ -37,7 +40,8 @@ class AddAlbumVC: UIViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let albumDetailVC = segue.destination as? AlbumDetailsVC {
-            albumDetailVC.album = selectedAlbum
+            let album = AlbumModel(albumName: (selectedAlbum?.name)!, artistName: (selectedAlbum?.artist?.name)!, imageUrl: (selectedAlbum?.image.text)!)
+            albumDetailVC.album = album
             albumDetailVC.albumImage = selectedImage
         }
     }
@@ -70,7 +74,7 @@ extension AddAlbumVC: UICollectionViewDelegate {
         guard let cell = cell as? AlbumCell else { return }
         
         // How should the operation update the cell once the data has been loaded?
-        let updateCellClosure: (AlbumModel?) -> () = { [unowned self] (album) in
+        let updateCellClosure: (ObjAlbum?) -> () = { [unowned self] (album) in
             cell.updateAppearanceFor(album, animated: true)
             self.loadingOperations.removeValue(forKey: indexPath)
         }

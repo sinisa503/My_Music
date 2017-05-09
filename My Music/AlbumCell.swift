@@ -20,7 +20,7 @@ class AlbumCell: UICollectionViewCell {
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var dimmedView: UIView!
     
-    func updateAppearanceFor(_ album: AlbumModel?, animated: Bool = true) {
+    func updateAppearanceFor(_ album: ObjAlbum?, animated: Bool = true) {
         reset()
         DispatchQueue.main.async {
             if animated {
@@ -43,7 +43,7 @@ class AlbumCell: UICollectionViewCell {
         display(nil)
     }
     
-    private func display(_ album:AlbumModel?) {
+    private func display(_ album:ObjAlbum?) {
         if let album = album {
             dimmCell(album: album)
             loadImage(album: album)
@@ -64,18 +64,22 @@ class AlbumCell: UICollectionViewCell {
         }
     }
     
-    private func loadImage(album: AlbumModel) {
-        if let image = cacheManager.cachedImage(for: album.imageUrl) {
-            albumImage.image = image
-            return
+    private func loadImage(album: ObjAlbum) {
+        if let image = album.image.text {
+            if let image = cacheManager.cachedImage(for: image) {
+                albumImage.image = image
+                return
+            }
+            downloadImage(album: album)
         }
-        downloadImage(album: album)
     }
     
-    private func downloadImage(album: AlbumModel) {
-        request = cacheManager.retrieveImage(for: album.imageUrl, completion: {[weak self](image) in
-            self?.populate(with: image)
-        })
+    private func downloadImage(album: ObjAlbum) {
+        if let image = album.image.text {
+            request = cacheManager.retrieveImage(for: image, completion: {[weak self](image) in
+                self?.populate(with: image)
+            })
+        }
     }
     
     private func populate(with image: UIImage) {
@@ -83,7 +87,7 @@ class AlbumCell: UICollectionViewCell {
         loadingIndicator.stopAnimating()
         albumImage.image = image
     }
-    private func dimmCell(album: AlbumModel) {
+    private func dimmCell(album: ObjAlbum) {
         if let delegate = UIApplication.shared.delegate as? AppDelegate{
              let context = delegate.persistentContainer.viewContext
             if Album.alreadyInDatabase(album: album, context: context) {
