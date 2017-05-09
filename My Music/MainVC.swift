@@ -118,17 +118,17 @@ extension MainVC: UICollectionViewDelegateFlowLayout {
     //MARK: UICollectionViewDelegateFlowLayout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let insets:CGFloat = 10.0
-        let numberOfCellPerRow = 2
-        let numberOfCellPerColumn = 3
-        let width = (collection.frame.width / CGFloat(numberOfCellPerRow)) - (insets * CGFloat(numberOfCellPerRow))
-        let height = (collection.frame.height / CGFloat(numberOfCellPerColumn)) - (insets * CGFloat(numberOfCellPerColumn))
+        let insets:CGFloat = 5.0
+        let numberOfCellPerRow = CGFloat(2.0)
+        let numberOfCellPerColumn = CGFloat(3.0)
+        let width = collectionView.frame.width / numberOfCellPerRow - (insets * numberOfCellPerRow)
+        let height = collectionView.frame.height / numberOfCellPerColumn - (insets * numberOfCellPerColumn)
         
         return CGSize(width: width, height: height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        let insets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        let insets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         return insets
     }
 }
