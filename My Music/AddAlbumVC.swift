@@ -65,7 +65,7 @@ extension AddAlbumVC: UICollectionViewDelegate {
         if let albumCell = collectionView.cellForItem(at: indexPath) as? AlbumCell {
             selectedImage = albumCell.albumImage.image
         }
-        performSegue(withIdentifier: "goToAlbumDetails" , sender: self)
+        performSegue(withIdentifier: SegueiConstant.GO_TO_SEARCH_ALBUM_DETAILS , sender: self)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -121,7 +121,7 @@ extension AddAlbumVC:  UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? AlbumCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellConstant.SEARCH_VC_CELL, for: indexPath) as? AlbumCell {
             cell.updateAppearanceFor(nil, animated: false)
             return cell
         }else {

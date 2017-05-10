@@ -237,10 +237,10 @@
 		02A78C041EBC9F3C001F110B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				020908481EC1F6DC0006EDE1 /* TopAlbumsResponce.swift */,
 				0209084A1EC319480006EDE1 /* ObjAlbum.swift */,
-				0209084C1EC319AF0006EDE1 /* AlbumTracksResponse.swift */,
 				0209084E1EC3399C0006EDE1 /* ObjTrack.swift */,
+				020908481EC1F6DC0006EDE1 /* TopAlbumsResponce.swift */,
+				0209084C1EC319AF0006EDE1 /* AlbumTracksResponse.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";

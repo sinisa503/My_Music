@@ -12,15 +12,16 @@ import AlamofireImage
 
 class ImageCache {
     
+    //Make it singleton
     static let shared = ImageCache()
+    private init() {}
 
     let imageCache = AutoPurgingImageCache(
         memoryCapacity: UInt64(100).megabytes(),
         preferredMemoryUsageAfterPurge: UInt64(60).megabytes()
     )
     
-    //MARK: - Image Downloading
-    
+    //Image Downloading
      func retrieveImage(for url: String, completion: @escaping (UIImage) -> Void) -> Request {
         return Alamofire.request(url, method: .get).responseImage { response in
             guard let image = response.result.value else { return }
@@ -29,12 +30,12 @@ class ImageCache {
         }
     }
     
-    //MARK: - Image Caching
-    
+    //Image Caching
     func cache(_ image: Image, for url: String) {
         imageCache.add(image, withIdentifier: url)
     }
     
+    //Return cashed image
     func cachedImage(for url: String) -> Image? {
         return imageCache.image(withIdentifier: url)
     }

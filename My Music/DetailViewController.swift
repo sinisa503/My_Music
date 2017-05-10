@@ -31,7 +31,7 @@ class DetailViewController: UIViewController {
         if let album = album {
             albumNameLabel.text = album.name
             navigationItem.title = album.artist
-            if let image = UIImage(data: album.image as! Data){
+            if let image = UIImage(data: (album.image as Data?)!){
                 albumImage.image = image
             }
         }
@@ -68,13 +68,7 @@ class DetailViewController: UIViewController {
     }
 }
 
-
-
-extension DetailViewController : UITableViewDelegate {
-    
-}
-
-extension DetailViewController : UITableViewDataSource {
+extension DetailViewController : UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -87,7 +81,7 @@ extension DetailViewController : UITableViewDataSource {
         }
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "MainTableCell") {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: CellConstant.CORE_DATA_DETAIL_TABLE_CELL) {
             let track = tracks[indexPath.item]
             cell.textLabel?.text = track.name
             if let durStr = track.duration {

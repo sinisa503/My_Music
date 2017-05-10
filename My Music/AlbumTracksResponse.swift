@@ -9,12 +9,13 @@
 import Foundation
 import ObjectMapper
 
+//Top object received by response of searching Info about album
 class ObjTopTrack : Mappable {
-
+private let ALBUM = "album"
     var album:ObjAlbumInfo?
     
     required init?(map: Map) {
-        if map.JSON["album"] == nil {
+        if map.JSON[ALBUM] == nil {
             return nil
         }else {
             mapping(map: map)
@@ -22,18 +23,21 @@ class ObjTopTrack : Mappable {
     }
     
     func mapping(map: Map) {
-        album <- map["album"]
+        album <- map[ALBUM]
     }
 }
 
 class ObjAlbumInfo: Mappable {
+    private let NAME = "name"
+    private let MBID = "mbid"
+    private let TRACKS = "tracks"
     
     var name: String?
     var mbid: String?
     var tracks: DictTrack?
 
     required init?(map: Map) {
-        if map.JSON["name"] == nil || map.JSON["mbid"] == nil || map.JSON["tracks"] == nil {
+        if map.JSON[NAME] == nil || map.JSON[MBID] == nil || map.JSON[TRACKS] == nil {
             return nil
         }else {
             mapping(map: map)
@@ -41,18 +45,19 @@ class ObjAlbumInfo: Mappable {
     }
     
     func mapping(map: Map) {
-        tracks <- map["tracks"]
-        name <- map["name"]
-        mbid <- map["mbid"]
+        tracks <- map[TRACKS]
+        name <- map[NAME]
+        mbid <- map[MBID]
     }
 }
 
 class DictTrack: Mappable {
+    private let TRACK = "track"
     
     var track:[ObjTrack]?
     
     required init?(map: Map) {
-        if map.JSON["track"] == nil {
+        if map.JSON[TRACK] == nil {
             return nil
         }else {
             mapping(map: map)
@@ -60,6 +65,6 @@ class DictTrack: Mappable {
     }
     
     func mapping(map: Map) {
-        track <- map["track"]
+        track <- map[TRACK]
     }
 }

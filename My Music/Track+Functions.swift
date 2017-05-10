@@ -13,7 +13,7 @@ extension Track {
     
     static func createNewTrack(track: ObjTrack, for album:Album, context: NSManagedObjectContext) {
         
-        if let newTrack = NSEntityDescription.insertNewObject(forEntityName: "Track", into: context) as? Track{
+        if let newTrack = NSEntityDescription.insertNewObject(forEntityName: CoreDataConstant.TRACK_ENTITY_NAME, into: context) as? Track{
             newTrack.name = track.name
             newTrack.album = album
             newTrack.duration = track.duration

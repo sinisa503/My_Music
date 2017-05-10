@@ -13,6 +13,10 @@ class AlbumDetailsVC: UIViewController {
     
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var albumImageView: UIImageView!
+    @IBOutlet weak var tableView: UITableView!
+    
     var album: ObjAlbum?
     var albumImage: UIImage?
     var tracks: [ObjTrack] = [] {
@@ -30,13 +34,9 @@ class AlbumDetailsVC: UIViewController {
     
     private var context: NSManagedObjectContext?
     
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var albumImageView: UIImageView!
-    @IBOutlet weak var tableView: UITableView!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         tableView.delegate = self
         tableView.dataSource = self
         saveButton.isEnabled = false
@@ -50,7 +50,7 @@ class AlbumDetailsVC: UIViewController {
         super.viewWillAppear(animated)
         configureController()
     }
-    
+    //Download more info for selected album
     private func configureController() {
         if let album = album {
             navigationItem.title = album.artist?.name
@@ -76,18 +76,16 @@ class AlbumDetailsVC: UIViewController {
         }
     }
     
-    @IBAction func saveAlbum(_ sender: UIBarButtonItem) {  
-        if albumDataCorrect {
-            if let context = context {
-                context.perform {[weak self] in
-                    if let image = self?.albumImage {
-                        let imageData:NSData? = UIImagePNGRepresentation(image) as NSData?                         
-                        if let data = imageData, let album = self?.album {
-                            Album.addNewAlbumToDatabase(albumModel: album, with: data, context: context) { [weak self] (saved) in
-                                if saved {
-                                    self?.saveButton.title = "Saved"
-                                    Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self?.goBackToSearch), userInfo: nil, repeats: false)
-                                }
+    @IBAction func saveAlbum(_ sender: UIBarButtonItem) {
+        if let context = context {
+            context.perform {[weak self] in
+                if let image = self?.albumImage {
+                    let imageData:NSData? = UIImagePNGRepresentation(image) as NSData?
+                    if let data = imageData, let album = self?.album {
+                        Album.addNewAlbumToDatabase(albumModel: album, with: data, context: context) { [weak self] (saved) in
+                            if saved {
+                                self?.saveButton.title = "Saved"
+                                Timer.scheduledTimer(timeInterval: 1.0, target: self!, selector: #selector(self?.goBackToSearch), userInfo: nil, repeats: false)
                             }
                         }
                     }
@@ -99,21 +97,12 @@ class AlbumDetailsVC: UIViewController {
     @objc private func goBackToSearch() {
         navigationController?.popViewController(animated: true)
     }
-    
-    private var albumDataCorrect:Bool {
-        //TODO: Check if data is correct and if not issue alert
-        return true
-    }
 }
 
-extension AlbumDetailsVC: UITableViewDelegate {
-    
-}
-
-extension AlbumDetailsVC : UITableViewDataSource {
+extension AlbumDetailsVC : UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "TableCell") {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: CellConstant.SEARCH_DETAIL_TRACKS_CELL) {
             cell.textLabel?.text = tracks[indexPath.row].name
             cell.detailTextLabel?.text = "\(tracks[indexPath.row].duration ?? "00.00")"
             return cell

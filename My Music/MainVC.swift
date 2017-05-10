@@ -16,9 +16,9 @@ class MainVC: UIViewController {
     
     @IBOutlet weak var collection: UICollectionView!
     @IBOutlet weak var noAlbumsLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         collection.dataSource = self
         collection.delegate = self
         
@@ -42,7 +42,7 @@ class MainVC: UIViewController {
     
     private func instatiateFRC() {
         let request: NSFetchRequest<Album> = Album.fetchRequest()
-        let sortDesc = NSSortDescriptor(key: "artist", ascending: true)
+        let sortDesc = NSSortDescriptor(key: SortDescriptor.ARTIST, ascending: true)
         request.sortDescriptors = [sortDesc]
         if let delegate = UIApplication.shared.delegate as? AppDelegate {
             let context = delegate.persistentContainer.viewContext
@@ -63,7 +63,7 @@ extension MainVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let album = fetchedResultsController?.object(at: indexPath) {
             selectedAlbum = album
-            performSegue(withIdentifier: "showAlbum", sender: nil)
+            performSegue(withIdentifier: SegueiConstant.SHOW_ALBUM_DETAIL_FROM_CORE_DATA, sender: nil)
         }
     }
     
@@ -96,7 +96,7 @@ extension MainVC: UICollectionViewDataSource {
         return fetchedResultsController?.sections?.count ?? 1
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell2", for: indexPath) as? MainCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellConstant.MAIN_VC_CELL, for: indexPath) as? MainCell {
             if let album = fetchedResultsController?.object(at: indexPath) {
                 cell.configureCell(album: album)
             }

@@ -8,6 +8,29 @@
 
 import Foundation
 
+typealias DownloadComplete = (Bool) -> ()
+
+struct CoreDataConstant {
+    static let ALBUM_ENTITY_NAME = "Album"
+    static let TRACK_ENTITY_NAME = "Track"
+}
+
+struct CellConstant {
+    static let MAIN_VC_CELL = "Cell2"
+    static let SEARCH_VC_CELL = "Cell"
+    static let SEARCH_DETAIL_TRACKS_CELL = "TableCell"
+    static let CORE_DATA_DETAIL_TABLE_CELL = "MainTableCell"
+}
+
+struct SegueiConstant {
+    static let GO_TO_SEARCH_ALBUM_DETAILS = "goToAlbumDetails"
+    static let SHOW_ALBUM_DETAIL_FROM_CORE_DATA = "showAlbum"
+}
+
+struct SortDescriptor {
+    static let ARTIST = "artist"
+}
+
 let BASE_URL = "http://ws.audioscrobbler.com"
 
 let METHOD_GET_ARTIST = "/2.0/?method=artist.getinfo&artist="
@@ -25,14 +48,3 @@ let API_KEY = "&api_key=f639f537be3377151be68a932521eca0"
 let FORMAT_JSON = "&format=json"
 
 let SHARED_SECRET = "4eb099e1bf52e7949280b3400c768f1a"
-
-let TEST_REQUEST_ALBUMS_CHER = "http://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums&artist=cher&api_key=f639f537be3377151be68a932521eca0&format=json"
-
-let TEST_REQUEST_ALBUM_CHER = "http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key= f639f537be3377151be68a932521eca0&artist=Cher&album=Believe&format=json"
-
-typealias DownloadComplete = (Bool) -> ()
-typealias InfoDownloadComplete = (String?) -> ()
-
-struct CoreDataConstant {
-    static let ALBUM_ENTITY_NAME = "Album"
-}

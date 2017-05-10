@@ -11,11 +11,14 @@ import ObjectMapper
 
 class ObjTrack: Mappable {
     
+    private let NAME = "name"
+    private let DURATION = "duration"
+    
     var name: String?
     var duration:String?
     
     required init?(map: Map) {
-        if map.JSON["name"] == nil || map.JSON["duration"] == nil {
+        if map.JSON[NAME] == nil || map.JSON[DURATION] == nil {
             return nil
         }else {
             mapping(map: map)
@@ -23,7 +26,7 @@ class ObjTrack: Mappable {
     }
     
     func mapping(map: Map) {
-        name <- map["name"]
-        duration <- map["duration"]
+        name <- map[NAME]
+        duration <- map[DURATION]
     }
 }

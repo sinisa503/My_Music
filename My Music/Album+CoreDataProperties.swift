@@ -13,7 +13,7 @@ import CoreData
 extension Album {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Album> {
-        return NSFetchRequest<Album>(entityName: "Album")
+        return NSFetchRequest<Album>(entityName: CoreDataConstant.ALBUM_ENTITY_NAME)
     }
 
     @NSManaged public var artist: String?

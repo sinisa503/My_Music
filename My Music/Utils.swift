@@ -9,6 +9,7 @@
 import Foundation
 
 class Utils {
+    //Format TimeInterval to acceptable format(mm.ss) string
     static func timeString(time:TimeInterval) -> String {
         let minutes = Int(time) / 60 % 60
         let seconds = Int(time) % 60

@@ -13,7 +13,7 @@ import CoreData
 extension Track {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Track> {
-        return NSFetchRequest<Track>(entityName: "Track")
+        return NSFetchRequest<Track>(entityName: CoreDataConstant.TRACK_ENTITY_NAME)
     }
 
     @NSManaged public var duration: String?

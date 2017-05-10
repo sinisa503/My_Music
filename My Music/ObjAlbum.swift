@@ -11,6 +11,11 @@ import ObjectMapper
 
 class ObjAlbum: Mappable {
     
+    private let NAME = "name"
+    private let MBID = "mbid"
+    private let ARTIST = "artist"
+    private let IMAGE = "image"
+    
     var name: String?
     var mbid: String?
     var artist: ObjArtist?
@@ -28,7 +33,7 @@ class ObjAlbum: Mappable {
     }
     
     required init?(map: Map) {
-        if map.JSON["name"] == nil || map.JSON["artist"] == nil || map.JSON["image"] == nil {
+        if map.JSON[NAME] == nil || map.JSON[ARTIST] == nil || map.JSON[IMAGE] == nil || map.JSON[MBID] == nil {
             return nil
         }else {
             mapping(map: map)
@@ -36,10 +41,10 @@ class ObjAlbum: Mappable {
     }
     
     func mapping(map: Map) {
-        name <- map["name"]
-        mbid <- map["mbid"]
-        artist <- map["artist"]
-        images <- map["image"]
+        name <- map[NAME]
+        mbid <- map[MBID]
+        artist <- map[ARTIST]
+        images <- map[IMAGE]
     }
     
     func set(tracks: [ObjTrack]) {
