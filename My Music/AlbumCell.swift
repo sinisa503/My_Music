@@ -55,6 +55,7 @@ class AlbumCell: UICollectionViewCell {
         }
         else {
             dimmedView.isHidden = true
+            self.isUserInteractionEnabled = true
             loadingIndicator.isHidden = false
             loadingIndicator.startAnimating()
             albumImage.isHidden = true
