@@ -50,15 +50,9 @@ class MainVC: UIViewController {
             
             do {
                 try fetchedResultsController?.performFetch()
-                if let albums = fetchedResultsController?.fetchedObjects {
-                    for album in albums {
-                        print(album.name)
-                    }
-                }
-                
                 collection.reloadData()
             } catch let error {
-                print(error)
+                print("Error fetching from CoreData: \(error.localizedDescription)")
             }
         }
     }

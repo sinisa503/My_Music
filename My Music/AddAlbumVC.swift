@@ -40,8 +40,7 @@ class AddAlbumVC: UIViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let albumDetailVC = segue.destination as? AlbumDetailsVC {
-            let album = AlbumModel(albumName: (selectedAlbum?.name)!, artistName: (selectedAlbum?.artist?.name)!, imageUrl: (selectedAlbum?.image.text)!)
-            albumDetailVC.album = album
+            albumDetailVC.album = selectedAlbum
             albumDetailVC.albumImage = selectedImage
         }
     }

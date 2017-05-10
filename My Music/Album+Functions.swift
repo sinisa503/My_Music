@@ -11,14 +11,14 @@ import CoreData
 
 extension Album {
     
-    static func addNewAlbumToDatabase(albumModel:AlbumModel,with image: NSData,context:NSManagedObjectContext, saved: (Bool) -> ()) {
+    static func addNewAlbumToDatabase(albumModel:ObjAlbum,with image: NSData,context:NSManagedObjectContext, saved: (Bool) -> ()) {
         
         let request = NSFetchRequest<Album>(entityName: CoreDataConstant.ALBUM_ENTITY_NAME)
         
-        if let id = albumModel.id {
+        if let id = albumModel.mbid {
             request.predicate = NSPredicate(format: "id = %@", id)
         }else {
-            request.predicate = NSPredicate(format: "name = %@", albumModel.name)
+            request.predicate = NSPredicate(format: "name = %@", albumModel.name!)
         }
         
         do {
@@ -27,8 +27,8 @@ extension Album {
                 return
             }else {
                 if let newAlbum = NSEntityDescription.insertNewObject(forEntityName: CoreDataConstant.ALBUM_ENTITY_NAME, into: context) as? Album{
-                    newAlbum.id = albumModel.id
-                    newAlbum.artist = albumModel.artist
+                    newAlbum.id = albumModel.mbid
+                    newAlbum.artist = albumModel.artist?.name
                     newAlbum.name = albumModel.name
                     if let tracks = albumModel.tracks {
                         for track in tracks {

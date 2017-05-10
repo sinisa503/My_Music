@@ -13,15 +13,15 @@ class AlbumDetailsVC: UIViewController {
     
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
-    var album: AlbumModel?
+    var album: ObjAlbum?
     var albumImage: UIImage?
-    var tracks: [TrackModel] = [] {
+    var tracks: [ObjTrack] = [] {
         didSet {
             album?.set(tracks: tracks)
             for track in tracks {
-                if let duration = Double(track.trackDuration) {
+                if let duration = Double(track.duration!) {
                     let formatedDuration = Utils.timeString(time: duration)
-                    track.set(duration: formatedDuration)
+                    track.duration = formatedDuration
                 }
             }
             tableView.reloadData()
@@ -53,7 +53,7 @@ class AlbumDetailsVC: UIViewController {
     
     private func configureController() {
         if let album = album {
-            navigationItem.title = album.artist
+            navigationItem.title = album.artist?.name
             nameLabel.text = album.name
             downloadTracks(for: album)
         }
@@ -62,16 +62,16 @@ class AlbumDetailsVC: UIViewController {
         }
     }
     
-    private func downloadTracks(for album:AlbumModel) {
+    private func downloadTracks(for album:ObjAlbum) {
         let apiService = ApiService()
-        apiService.downloadInfo(albumName: album.name, forArtist: album.artist) { [weak self] (albumId) in
-            self?.saveButton.isEnabled = true
-            self?.activityIndicator.isHidden = true
-            self?.activityIndicator.stopAnimating()
-            self?.tracks = apiService.arrayOfTracks
-            if let id = albumId {
-                album.set(id: id)
-                print(id)
+        apiService.downloadInfo(albumName: album.name!, forArtist: (album.artist?.name)!) { [weak self] (completed) in
+            if completed {
+                self?.saveButton.isEnabled = true
+                self?.activityIndicator.isHidden = true
+                self?.activityIndicator.stopAnimating()
+                self?.tracks = apiService.arrayOfTracks
+            }else {
+                print("Not completed!")
             }
         }
     }
@@ -114,8 +114,8 @@ extension AlbumDetailsVC : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "TableCell") {
-            cell.textLabel?.text = tracks[indexPath.row].trackName
-            cell.detailTextLabel?.text = "\(tracks[indexPath.row].trackDuration)"
+            cell.textLabel?.text = tracks[indexPath.row].name
+            cell.detailTextLabel?.text = "\(tracks[indexPath.row].duration ?? "00.00")"
             return cell
         }else {
             return UITableViewCell()
