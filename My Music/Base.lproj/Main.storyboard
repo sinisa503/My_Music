@@ -299,29 +299,28 @@
                                             <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="gZx-qK-dnK">
-                                                    <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
-                                                    <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nhK-Xl-pij" userLabel="AlbumImage">
-                                                            <rect key="frame" x="0.0" y="0.0" width="200" height="140"/>
-                                                        </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="OM5-hM-nUS" userLabel="albumLabel">
-                                                            <rect key="frame" x="0.0" y="140" width="200" height="60"/>
-                                                            <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="18"/>
-                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                            <nil key="highlightedColor"/>
-                                                            <color key="shadowColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                            <size key="shadowOffset" width="1" height="1"/>
-                                                        </label>
-                                                    </subviews>
-                                                </stackView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nhK-Xl-pij" userLabel="AlbumImage">
+                                                    <rect key="frame" x="-0.5" y="0.0" width="200" height="200"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="OM5-hM-nUS" userLabel="albumLabel">
+                                                    <rect key="frame" x="-0.5" y="176" width="200" height="24"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.26883561643835618" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="20"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <color key="shadowColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <size key="shadowOffset" width="1" height="1"/>
+                                                </label>
                                             </subviews>
                                         </view>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="gZx-qK-dnK" secondAttribute="bottom" id="OSa-Kc-iYf"/>
-                                            <constraint firstAttribute="trailing" secondItem="gZx-qK-dnK" secondAttribute="trailing" id="PNY-17-Snm"/>
-                                            <constraint firstItem="gZx-qK-dnK" firstAttribute="top" secondItem="mIQ-6J-qeh" secondAttribute="top" id="oUd-u8-Qaj"/>
-                                            <constraint firstItem="gZx-qK-dnK" firstAttribute="leading" secondItem="mIQ-6J-qeh" secondAttribute="leading" id="yPo-FA-C1L"/>
+                                            <constraint firstItem="nhK-Xl-pij" firstAttribute="centerY" secondItem="mIQ-6J-qeh" secondAttribute="centerY" id="4hy-TT-def"/>
+                                            <constraint firstItem="nhK-Xl-pij" firstAttribute="height" secondItem="mIQ-6J-qeh" secondAttribute="height" id="A80-Ss-AOo"/>
+                                            <constraint firstAttribute="bottom" secondItem="OM5-hM-nUS" secondAttribute="bottom" id="DhH-to-0xn"/>
+                                            <constraint firstItem="nhK-Xl-pij" firstAttribute="width" secondItem="mIQ-6J-qeh" secondAttribute="width" id="I7U-T5-2QA"/>
+                                            <constraint firstAttribute="trailing" secondItem="OM5-hM-nUS" secondAttribute="trailing" id="RXh-fG-tsi"/>
+                                            <constraint firstItem="nhK-Xl-pij" firstAttribute="centerX" secondItem="mIQ-6J-qeh" secondAttribute="centerX" id="WTv-V2-920"/>
+                                            <constraint firstItem="OM5-hM-nUS" firstAttribute="leading" secondItem="mIQ-6J-qeh" secondAttribute="leading" id="qp8-CH-cCC"/>
                                         </constraints>
                                         <size key="customSize" width="200" height="200"/>
                                         <connections>
