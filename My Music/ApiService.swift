@@ -18,7 +18,7 @@ class ApiService {
     
     //Mapping JSON objects for top albums request
     func downloadTopAlbumsFor(artist: String, completed:  @escaping DownloadComplete) {
-        let formatedArtistString = artist.replacingOccurrences(of: " ", with: "%20").lowercased()
+      if let formatedArtistString = artist.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) {
         if let currentUrl = URL(string: "\(BASE_URL)\(METHOD_GET_ARTIST_TOP_ALBUMS)\(formatedArtistString)\(API_KEY)\(FORMAT_JSON)") {
             Alamofire.request(currentUrl).responseObject(completionHandler: {[weak self] (response: DataResponse<TopAlbum>) in
                 if let topAlbum = response.result.value {
@@ -35,25 +35,26 @@ class ApiService {
                 }
             })
         }
+        }
     }
     
     //Mapping JSON objects for album tracks request
     func downloadInfo(albumName album:String,  forArtist artist: String, completed:  @escaping DownloadComplete) {
-        let formatedArtistString = artist.replacingOccurrences(of: " ", with: "%20").lowercased()
-        let formatedAlbumString = album.replacingOccurrences(of: " ", with: "%20").lowercased()
+      if let formatedArtistString = artist.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed), let formatedAlbumString = album.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) {
         if let currentUrl = URL(string: "\(BASE_URL)\(METHOD_GET_ALBUM_INFO)\(API_KEY)\(PARAMETAR_ARTIST)\(formatedArtistString)\(PARAMETAR_ALBUM)\(formatedAlbumString)\(FORMAT_JSON)") {
-            Alamofire.request(currentUrl, method: .get).responseObject(completionHandler: { [weak self] (response: DataResponse<ObjTopTrack>) in
-                if let topTrackObj = response.result.value {
-                    if let album = topTrackObj.album {
-                        for track in (album.tracks?.track)! {
-                            self?.arrayOfTracks.append(track)
-                        }
-                    }
-                    completed(true)
-                }else {
-                    completed(false)
+          Alamofire.request(currentUrl, method: .get).responseObject(completionHandler: { [weak self] (response: DataResponse<ObjTopTrack>) in
+            if let topTrackObj = response.result.value {
+              if let album = topTrackObj.album {
+                for track in (album.tracks?.track)! {
+                  self?.arrayOfTracks.append(track)
                 }
-            })
+              }
+              completed(true)
+            }else {
+              completed(false)
+            }
+          })
         }
+      }
     }
 }

@@ -64,18 +64,20 @@ class AlbumDetailsVC: UIViewController {
     
     private func downloadTracks(for album:ObjAlbum) {
         let apiService = ApiService()
-        apiService.downloadInfo(albumName: album.name!, forArtist: (album.artist?.name)!) { [weak self] (completed) in
-            if completed {
-                self?.saveButton.isEnabled = true
-                self?.activityIndicator.isHidden = true
-                self?.activityIndicator.stopAnimating()
-                self?.tracks = apiService.arrayOfTracks
-            }else {
-                print("Not completed!")
-            }
+      if let name = album.name, let artist = album.artist?.name {
+        apiService.downloadInfo(albumName: name, forArtist: artist) { [weak self] (completed) in
+          if completed {
+            self?.saveButton.isEnabled = true
+            self?.activityIndicator.isHidden = true
+            self?.activityIndicator.stopAnimating()
+            self?.tracks = apiService.arrayOfTracks
+          }else {
+            print("Not completed!")
+          }
         }
+      }
     }
-    
+  
     @IBAction func saveAlbum(_ sender: UIBarButtonItem) {
         if let context = context {
             context.perform {[weak self] in
