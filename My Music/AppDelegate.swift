@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import  INSPersistentContainer
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
