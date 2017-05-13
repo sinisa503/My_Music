@@ -10,10 +10,13 @@ import XCTest
 @testable import My_Music
 
 class My_MusicTests: XCTestCase {
+  
+  var formatedTestTime:String?
     
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+
+        formatedTestTime = Utils.timeString(time: 128.0)
     }
     
     override func tearDown() {
@@ -21,9 +24,8 @@ class My_MusicTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testTimeStringFunc() {
+      XCTAssertEqual(formatedTestTime, "02:08", "Formatting TimeInterval into string not working correct!")
     }
     
     func testPerformanceExample() {
