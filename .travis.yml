@@ -3,3 +3,5 @@ osx_image: xcode8.3
 xcode_workspace: My Music.xcworkspace
 xcode_scheme: My Music
 xcode_sdk: iphonesimulator10.3
+
+script: xcodebuild clean && xcodebuild build -sdk iphonesimulator10.3 -project My Music.xcodeproj -scheme My Music CODE_SIGNING_REQUIRED=NO
