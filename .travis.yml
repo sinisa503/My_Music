@@ -1,5 +1,5 @@
 language: objective-c
 osx_image: xcode8.3
-xcode_project: My\ Music.xcodeproj
-xcode_scheme: My\ Music
+xcode_project: My Music.xcodeproj
+xcode_scheme: My Music
 xcode_sdk: iphonesimulator10.3
