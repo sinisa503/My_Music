@@ -1,3 +1,5 @@
 language: objective-c
+xcode_project: My Music.xcodeproj # path to your xcodeproj folder
+xcode_scheme: My Music
 
 
