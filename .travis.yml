@@ -1,4 +1,4 @@
 language: objective-c
-xcode_workspace: My\ Music.xcworkspace
-xcode_scheme: My\ Music
+script: xcodebuild -workspace My\ Music.xcworkspace -scheme My\ Music -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
+
 
