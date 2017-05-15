@@ -1,5 +1,4 @@
 language: objective-c
-xcode_project: My Music.xcodeproj # path to your xcodeproj folder
-xcode_scheme: My Music
+xcode_workspace: My Music.xcworkspace # path to your xcodeproj folder
 
 
