@@ -1,3 +1,4 @@
 language: objective-c
-osx_image: xcode8
-script: — xcodebuild clean build -workspace My Music.xcworkspace -scheme My Music -destination “platform=iOS Simulator,name=iPhone 6S”
+xcode_workspace: My\ Music.xcworkspace
+xcode_scheme: My\ Music
+
