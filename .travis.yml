@@ -1,0 +1,5 @@
+language: objective-c
+xcode_workspace: My Music.xcworkspace # path to your xcodeproj folder
+xcode_scheme: My Music
+script: xctool -workspace My\ Music.xcworkspace -scheme My\ Music
+
